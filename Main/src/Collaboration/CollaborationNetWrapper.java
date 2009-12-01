@@ -9,6 +9,6 @@ package Collaboration;
  *
  * @author mrandell
  */
-public class CollaborationController {
+public class CollaborationNetWrapper {
 
 }
