@@ -27,6 +27,7 @@ Public Methods:
 -->controller,method,param1,param2,.....
 
 --controller can be *con* for contact, *ftr* for file transfer, *col* for collaboration, *msg* for message, and net for network....con, ftr, col, msg, net
+--method must be exactly three characters long - this makes parsing easier and shorter. May reconsider this restriction if a compelling case presents itself
 --Note that there are no spaces
 
 -Returns the Socket used to send the message for follow up responses
