@@ -1,14 +1,19 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-
 package Collaboration;
 
-/**
- *
- * @author mrandell
- */
+import java.net.*;
+import java.io.*;
+
 public class CollaborationNetWrapper {
 
+    PrintWriter out;
+    BufferedReader in;
+
+    public CollaborationNetWrapper() {
+    }
+
+    public void acceptInvite(Socket s) {
+    }
+
+    public void declineInvite(Socket s) {
+    }
 }

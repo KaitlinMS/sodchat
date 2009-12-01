@@ -71,7 +71,7 @@ public class SODApp extends SingleFrameApplication {
         show(new MessageView());
     }
 
-    public void joinChat(){
+    public void joinChat(String ip){
         
     }
 
@@ -126,9 +126,8 @@ public class SODApp extends SingleFrameApplication {
      }
 
      public void colNetEvent(Socket s, String[] event){
-        System.out.println("Colab Event");
         if(event[0].equals("req")){
-            
+            show (new InvitationRequest(event[1], s.getInetAddress().getHostAddress()));
         }
      }
 
