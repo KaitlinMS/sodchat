@@ -148,10 +148,12 @@ public class DiscussionView extends javax.swing.JFrame {
         int[] i = contactList.getSelectedIndices();
         SODApp sod = SODApp.getApplication();
         sod.hostChat(privateCheck.isSelected(), octaveCheck.isSelected(), i);
+        this.dispose();
     }
 
     @Action
     public void Join() {
+        this.dispose();
         
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables

@@ -1,32 +1,16 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-
-/*
- * NewContact.java
- *
- * Created on 28-Nov-2009, 5:44:02 PM
- */
-
 package sod;
 
 import org.jdesktop.application.Action;
 
-/**
- *
- * @author Adrian
- */
 public class InvitationRequest extends javax.swing.JFrame {
 
-    
-    /** Creates new form NewContact */
-    public InvitationRequest(String ip) {
-        initComponents();
-        contactip.setText(ip);
-        this.setDefaultCloseOperation(this.DISPOSE_ON_CLOSE);
-        this.setVisible(true);
+    String ip;
 
+    public InvitationRequest(String name, String i) {
+        initComponents();
+        contactName.setText(name);
+        ip = i;
+        this.setDefaultCloseOperation(this.DISPOSE_ON_CLOSE);
     }
 
     /** This method is called from within the constructor to
@@ -39,9 +23,9 @@ public class InvitationRequest extends javax.swing.JFrame {
     private void initComponents() {
 
         jLabel1 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
-        contactip = new javax.swing.JLabel();
-        jButton2 = new javax.swing.JButton();
+        acceptButton = new javax.swing.JButton();
+        contactName = new javax.swing.JLabel();
+        declineButton = new javax.swing.JButton();
 
         setName("Form"); // NOI18N
         setResizable(false);
@@ -51,16 +35,16 @@ public class InvitationRequest extends javax.swing.JFrame {
         jLabel1.setName("jLabel1"); // NOI18N
 
         javax.swing.ActionMap actionMap = org.jdesktop.application.Application.getInstance(sod.SODApp.class).getContext().getActionMap(InvitationRequest.class, this);
-        jButton1.setAction(actionMap.get("Accept")); // NOI18N
-        jButton1.setText(resourceMap.getString("jButton1.text")); // NOI18N
-        jButton1.setName("jButton1"); // NOI18N
+        acceptButton.setAction(actionMap.get("Accept")); // NOI18N
+        acceptButton.setText(resourceMap.getString("acceptButton.text")); // NOI18N
+        acceptButton.setName("acceptButton"); // NOI18N
 
-        contactip.setText(resourceMap.getString("contactip.text")); // NOI18N
-        contactip.setName("contactip"); // NOI18N
+        contactName.setText(resourceMap.getString("contactName.text")); // NOI18N
+        contactName.setName("contactName"); // NOI18N
 
-        jButton2.setAction(actionMap.get("Decline")); // NOI18N
-        jButton2.setText(resourceMap.getString("jButton2.text")); // NOI18N
-        jButton2.setName("jButton2"); // NOI18N
+        declineButton.setAction(actionMap.get("Decline")); // NOI18N
+        declineButton.setText(resourceMap.getString("declineButton.text")); // NOI18N
+        declineButton.setName("declineButton"); // NOI18N
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -70,11 +54,11 @@ public class InvitationRequest extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jLabel1)
                 .addGap(18, 18, 18)
-                .addComponent(contactip, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(contactName, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(acceptButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(declineButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGap(21, 21, 21))
         );
         layout.setVerticalGroup(
@@ -83,9 +67,9 @@ public class InvitationRequest extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
-                    .addComponent(contactip)
-                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(contactName)
+                    .addComponent(acceptButton, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(declineButton, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -94,18 +78,17 @@ public class InvitationRequest extends javax.swing.JFrame {
 
     @Action
     public void Accept() {
+        SODApp.getApplication().joinChat(ip);
     }
 
     @Action
     public void Decline() {
+        this.dispose();
     }
-
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel contactip;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
+    private javax.swing.JButton acceptButton;
+    private javax.swing.JLabel contactName;
+    private javax.swing.JButton declineButton;
     private javax.swing.JLabel jLabel1;
     // End of variables declaration//GEN-END:variables
-
 }
