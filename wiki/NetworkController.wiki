@@ -22,12 +22,15 @@ Public Methods:
 *Send(String Message, String ip) -> Socket* throws Exception
 
 -Sends the message to the indicated ip address
+
 -The message should be in the format:
 
 -->controller,method,param1,param2,.....
 
 --controller can be *con* for contact, *ftr* for file transfer, *col* for collaboration, *msg* for message, and net for network....con, ftr, col, msg, net
+
 --method must be exactly three characters long - this makes parsing easier and shorter. May reconsider this restriction if a compelling case presents itself
+
 --Note that there are no spaces
 
 -Returns the Socket used to send the message for follow up responses
@@ -37,7 +40,9 @@ Private Method:
 *Listen()
 
 -Listens to port 44533 for incomming network connections
+
 -When a network connection is established it reads the first line and routes to to an appropriate netEvent handler in SODApp. They correspond to conNetEvent, colNetEvent, msgNetEvent, ftrNetEvent, netNetEvent.
+
 -It passes the established socket and a String in the form of:
 
 -->method,param1,param2,....
