@@ -19,7 +19,7 @@ Interface Details (In progress)
 
 Public Methods:
 
-*Send(String Message, String ip) -> Socket*
+*Send(String Message, String ip) -> Socket* throws Exception
 
 -Sends the message to the indicated ip address
 -The message should be in the format:
