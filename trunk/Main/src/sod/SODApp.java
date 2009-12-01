@@ -127,6 +127,9 @@ public class SODApp extends SingleFrameApplication {
 
      public void colNetEvent(Socket s, String[] event){
         System.out.println("Colab Event");
+        if(event[0].equals("req")){
+            
+        }
      }
 
      public void ftrNetEvent(Socket s, String[] event){
