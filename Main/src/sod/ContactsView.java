@@ -131,7 +131,7 @@ public class ContactsView extends FrameView {
 
     @Action
     public void newMessage() {
-        SODApp.getApplication().newMessage();
+        //SODApp.getApplication().newMessage();
     }
 
     @Action

@@ -8,8 +8,9 @@
  *
  * Created on 28-Nov-2009, 5:15:44 PM
  */
-
 package sod;
+
+import org.jdesktop.application.Action;
 
 /**
  *
@@ -18,8 +19,9 @@ package sod;
 public class DiscussionView extends javax.swing.JFrame {
 
     /** Creates new form DiscussionView */
-    public DiscussionView() {
+    public DiscussionView(String[] Names) {
         initComponents();
+        contactList.setListData(Names);
     }
 
     /** This method is called from within the constructor to
@@ -37,10 +39,10 @@ public class DiscussionView extends javax.swing.JFrame {
         jButton1 = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jList1 = new javax.swing.JList();
+        contactList = new javax.swing.JList();
         jLabel3 = new javax.swing.JLabel();
-        jCheckBox1 = new javax.swing.JCheckBox();
-        jCheckBox2 = new javax.swing.JCheckBox();
+        privateCheck = new javax.swing.JCheckBox();
+        octaveCheck = new javax.swing.JCheckBox();
         jButton2 = new javax.swing.JButton();
 
         setName("Form"); // NOI18N
@@ -54,6 +56,8 @@ public class DiscussionView extends javax.swing.JFrame {
 
         jSeparator1.setName("jSeparator1"); // NOI18N
 
+        javax.swing.ActionMap actionMap = org.jdesktop.application.Application.getInstance(sod.SODApp.class).getContext().getActionMap(DiscussionView.class, this);
+        jButton1.setAction(actionMap.get("Join")); // NOI18N
         jButton1.setText(resourceMap.getString("jButton1.text")); // NOI18N
         jButton1.setName("jButton1"); // NOI18N
 
@@ -62,18 +66,19 @@ public class DiscussionView extends javax.swing.JFrame {
 
         jScrollPane1.setName("jScrollPane1"); // NOI18N
 
-        jList1.setName("jList1"); // NOI18N
-        jScrollPane1.setViewportView(jList1);
+        contactList.setName("contactList"); // NOI18N
+        jScrollPane1.setViewportView(contactList);
 
         jLabel3.setText(resourceMap.getString("jLabel3.text")); // NOI18N
         jLabel3.setName("jLabel3"); // NOI18N
 
-        jCheckBox1.setText(resourceMap.getString("jCheckBox1.text")); // NOI18N
-        jCheckBox1.setName("jCheckBox1"); // NOI18N
+        privateCheck.setText(resourceMap.getString("privateCheck.text")); // NOI18N
+        privateCheck.setName("privateCheck"); // NOI18N
 
-        jCheckBox2.setText(resourceMap.getString("jCheckBox2.text")); // NOI18N
-        jCheckBox2.setName("jCheckBox2"); // NOI18N
+        octaveCheck.setText(resourceMap.getString("octaveCheck.text")); // NOI18N
+        octaveCheck.setName("octaveCheck"); // NOI18N
 
+        jButton2.setAction(actionMap.get("Host")); // NOI18N
         jButton2.setText(resourceMap.getString("jButton2.text")); // NOI18N
         jButton2.setName("jButton2"); // NOI18N
 
@@ -98,8 +103,8 @@ public class DiscussionView extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jCheckBox1)
-                    .addComponent(jCheckBox2)
+                    .addComponent(privateCheck)
+                    .addComponent(octaveCheck)
                     .addComponent(jLabel3))
                 .addContainerGap(312, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
@@ -124,9 +129,9 @@ public class DiscussionView extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel2)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jCheckBox1)
+                        .addComponent(privateCheck)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jCheckBox2)
+                        .addComponent(octaveCheck)
                         .addGap(18, 18, 18)
                         .addComponent(jLabel3)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -138,19 +143,28 @@ public class DiscussionView extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    @Action
+    public void Host() {
+        int[] i = contactList.getSelectedIndices();
+        SODApp sod = SODApp.getApplication();
+        sod.hostChat(privateCheck.isSelected(), octaveCheck.isSelected(), i);
+    }
 
+    @Action
+    public void Join() {
+        
+    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JList contactList;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
-    private javax.swing.JCheckBox jCheckBox1;
-    private javax.swing.JCheckBox jCheckBox2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JList jList1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JTextField jTextField1;
+    private javax.swing.JCheckBox octaveCheck;
+    private javax.swing.JCheckBox privateCheck;
     // End of variables declaration//GEN-END:variables
-
 }
