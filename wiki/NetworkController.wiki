@@ -25,7 +25,7 @@ Public Methods:
 
 -The message should be in the format:
 
--->controller,method,param1,param2,.....,#parameters
+-->controller,method,param1,param2,.....,paramn,n
 
 --controller can be *con* for contact, *ftr* for file transfer, *col* for collaboration, *msg* for message, and net for network....con, ftr, col, msg, net
 
