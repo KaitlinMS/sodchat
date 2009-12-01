@@ -90,6 +90,10 @@ public class SODApp extends SingleFrameApplication {
      public void addContact(String IP, String Name){
         concontroller.addContact(IP, Name, setSet.getUserName());
         contacts.updateList();
+        try{
+            netcontroller.Send("con,req,"+setSet.getUserName()+",1", IP);
+        }
+        catch(Exception e){}
      }
 
      public void removeContact(int i){
@@ -102,19 +106,24 @@ public class SODApp extends SingleFrameApplication {
         contacts.updateList();
      }
 
-     public void conNetEvent(Socket s, String command){
-        System.out.println("CONTACT EVENT!");
+     public void conNetEvent(Socket s, String[] event){
+         if(event[0].equals("req")){
+             concontroller.contactRequest(s.getInetAddress().getHostAddress(), event[1]);
+             contacts.updateList();
+         }
      }
 
-     public void msgNetEvent(Socket s, String command){
+     public void msgNetEvent(Socket s, String[] event){
 
      }
 
-     public void colNetEvent(Socket s, String command){
+     public void colNetEvent(Socket s, String[] event){
 
      }
 
-     public void ftrNetEvent(Socket s, String command){
+     public void ftrNetEvent(Socket s, String[] event){
          
      }
+
+     
 }
