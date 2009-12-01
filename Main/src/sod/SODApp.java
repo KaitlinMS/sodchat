@@ -65,10 +65,11 @@ public class SODApp extends SingleFrameApplication {
     public void hostChat(Boolean p, Boolean o, int[] contacts){
             try {
                 for (int i = 0; i < contacts.length; i++) {
-                    netcontroller.Send("col,inv,"+setSet.getUserName()+",1", concontroller.getAllIps()[i]);
+                    int j = contacts[i];
+                    if (j != -1)netcontroller.Send("col,inv,"+setSet.getUserName()+",1", concontroller.getAllIps()[j]);
             }
         } catch (Exception e) {}
-        show(new MessageView());
+        (new MessageView()).setVisible(true);
     }
 
     public void joinChat(String ip){
@@ -80,7 +81,7 @@ public class SODApp extends SingleFrameApplication {
     }
 
      public void showDiscuss(){
-       show(new DiscussionView(concontroller.getAllNames()));
+       (new DiscussionView(concontroller.getAllNames())).setVisible(true);
     }
 
      public void showAdd(){
@@ -115,9 +116,14 @@ public class SODApp extends SingleFrameApplication {
      }
 
      public void conNetEvent(Socket s, String[] event){
+
+         //Incoming contact request event
          if(event[0].equals("req")){
              concontroller.contactRequest(s.getInetAddress().getHostAddress(), event[1]);
              contacts.updateList();
+             try{
+                s.close();
+            }catch(Exception e){}
          }
      }
 
@@ -126,8 +132,12 @@ public class SODApp extends SingleFrameApplication {
      }
 
      public void colNetEvent(Socket s, String[] event){
-        if(event[0].equals("req")){
-            show (new InvitationRequest(event[1], s.getInetAddress().getHostAddress()));
+        //Invitation to a chat event
+        if(event[0].equals("inv")){
+            (new InvitationRequest(event[1], s.getInetAddress().getHostAddress())).setVisible(true);
+            try{
+                s.close();
+            }catch(Exception e){}
         }
      }
 

@@ -145,7 +145,13 @@ public class DiscussionView extends javax.swing.JFrame {
 
     @Action
     public void Host() {
-        int[] i = contactList.getSelectedIndices();
+        int[] i;
+        if(contactList.isSelectionEmpty() == false) 
+            i = contactList.getSelectedIndices();
+        else{
+            int[] j = {-1};
+            i = j;
+        }
         SODApp sod = SODApp.getApplication();
         sod.hostChat(privateCheck.isSelected(), octaveCheck.isSelected(), i);
         this.dispose();
