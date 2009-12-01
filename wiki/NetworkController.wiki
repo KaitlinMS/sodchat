@@ -20,6 +20,7 @@ Interface Details (In progress)
 Public Methods:
 
 *Send(String Message, String ip) -> Socket*
+
 -Sends the message to the indicated ip address
 -The message should be in the format:
 
@@ -33,6 +34,7 @@ Public Methods:
 Private Method:
 
 *Listen()
+
 -Listens to port 44533 for incomming network connections
 -When a network connection is established it reads the first line and routes to to an appropriate netEvent handler in SODApp. They correspond to conNetEvent, colNetEvent, msgNetEvent, ftrNetEvent, netNetEvent.
 -It passes the established socket and a String in the form of:
