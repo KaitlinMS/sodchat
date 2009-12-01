@@ -18,7 +18,7 @@ public class ContactController{
             clist.add(c);
 	}
 
-        public void recieveContact(String ip, String cn){
+        public void contactRequest(String ip, String cn){
             Contact c = new Contact(ip, cn);
             clist.add(c);
         }

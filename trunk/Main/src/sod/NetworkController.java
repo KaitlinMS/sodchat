@@ -19,6 +19,7 @@ public class NetworkController extends Thread{
         try{
             ss = new ServerSocket(PORT);
             sod = SODApp.getApplication();
+            this.start();
         }
         catch(Exception e){}
     }
@@ -29,18 +30,18 @@ public class NetworkController extends Thread{
             in = new BufferedReader(new InputStreamReader(ts.getInputStream()));
 
             String command = in.readLine();
-
+            
             if(command.startsWith("con,"))
-                sod.conNetEvent(ts, command.substring(4));
+                sod.conNetEvent(ts, parseNetEvent(command.substring(4)));
 
             else if(command.startsWith("msg,"))
-                sod.msgNetEvent(ts, command.substring(4));
+                sod.msgNetEvent(ts, parseNetEvent(command.substring(4)));
 
             else if(command.startsWith("col,"))
-                sod.colNetEvent(ts, command.substring(4));
+                sod.colNetEvent(ts, parseNetEvent(command.substring(4)));
 
             else if(command.startsWith("ftr,"))
-                sod.colNetEvent(ts, command.substring(4));
+                sod.colNetEvent(ts, parseNetEvent(command.substring(4)));
 
             ss.close();
             in.close();
@@ -49,9 +50,29 @@ public class NetworkController extends Thread{
         catch(Exception e){}
     }
 
-    public void Send(String message){
-        
+    public Socket Send(String message, String ip) throws Exception{
+        Socket sendSocket;
+        try{
+            sendSocket = new Socket(InetAddress.getByName(ip), PORT);
+            PrintWriter sout = new PrintWriter(sendSocket.getOutputStream(), true);
+            sout.println(message);
+            return sendSocket;
+        }
+        catch(Exception e){throw e;}
     }
+
+     private String[] parseNetEvent(String cmd){
+        int i = Integer.parseInt(cmd.substring(cmd.length() -1));
+        String[] parsed = new String[i+1];
+
+        int j, start, end;
+        for(j =0, start = 0, end = 0; j<=i; j++){
+            end = cmd.indexOf(',', start);
+            parsed[j] = cmd.substring(start, end);
+            start = end + 1;
+        }
+        return parsed;
+     }
 
     public void run(){
         while(true){
