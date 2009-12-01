@@ -15,7 +15,7 @@ import Contacts.ContactController;
  */
 public class SODApp extends SingleFrameApplication {
     public FileTransfer transWindow;
-    public DiscussionView setDiscuss;
+    //public DiscussionView setDiscuss;
     public NewContact setAdd;
     public Settings setSet;
     public ContactsView contacts;
@@ -34,7 +34,6 @@ public class SODApp extends SingleFrameApplication {
         contacts = new ContactsView(this);
         show(contacts);
         transWindow = new FileTransfer();
-        setDiscuss = new DiscussionView();
         setAdd = new NewContact();
         setSet = new Settings();
 
@@ -63,8 +62,17 @@ public class SODApp extends SingleFrameApplication {
         launch(SODApp.class, args);
     }
 
-    public void newMessage(){
+    public void hostChat(Boolean p, Boolean o, int[] contacts){
+            try {
+                for (int i = 0; i < contacts.length; i++) {
+                    netcontroller.Send("col,inv,"+setSet.getUserName()+",1", concontroller.getAllIps()[i]);
+            }
+        } catch (Exception e) {}
         show(new MessageView());
+    }
+
+    public void joinChat(){
+        
     }
 
      public void showTransfer(){
@@ -72,7 +80,7 @@ public class SODApp extends SingleFrameApplication {
     }
 
      public void showDiscuss(){
-        setDiscuss.setVisible(true);
+       show(new DiscussionView(concontroller.getAllNames()));
     }
 
      public void showAdd(){
@@ -114,15 +122,15 @@ public class SODApp extends SingleFrameApplication {
      }
 
      public void msgNetEvent(Socket s, String[] event){
-
+        System.out.println("Message Event");
      }
 
      public void colNetEvent(Socket s, String[] event){
-
+        System.out.println("Colab Event");
      }
 
      public void ftrNetEvent(Socket s, String[] event){
-         
+         System.out.println("File transfer Event");
      }
 
      
