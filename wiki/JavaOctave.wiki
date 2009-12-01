@@ -3,6 +3,9 @@
 = Introduction =
 With the javaoctave package, we can now communicate with octave. We can run arbitrary code in octave and display the results in the default IO stream -- I'm sure we can manage to put it in the chat window box.
 
+Example of redirection: http://www.java-tips.org/java-se-tips/java.lang/redirect-standard-output-to-a-file.html
+
+
 = Details =
 The JavaOctave package has two *requirements*:
   # The Commons Logging Api JAR library --this is a dependency
