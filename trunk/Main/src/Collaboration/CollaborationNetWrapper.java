@@ -11,8 +11,9 @@ public class CollaborationNetWrapper {
     public CollaborationNetWrapper() {
     }
 
-    public Boolean Join(Socket s, CollaborationController cc) {
+    public Boolean canJoin(Socket s) {
         try {
+            System.out.println("Test");
             in = new BufferedReader(new InputStreamReader(s.getInputStream()));
             out = new PrintWriter(s.getOutputStream(), true);
 
@@ -37,9 +38,23 @@ public class CollaborationNetWrapper {
         return false;
     }
 
+    public void respond(Socket s, String msg){
+        try {
+            System.out.println("Responding");
+            out = new PrintWriter(s.getOutputStream(), true);
+            out.println(msg);
+        }
+        catch(Exception e){}
+
+    }
+
     public void acceptInvite(Socket s) {
     }
 
     public void declineInvite(Socket s) {
+    }
+
+    public void joinRequest(String ip, String chatName){
+        
     }
 }

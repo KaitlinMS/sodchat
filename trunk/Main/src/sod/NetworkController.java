@@ -30,6 +30,7 @@ public class NetworkController extends Thread{
             in = new BufferedReader(new InputStreamReader(ts.getInputStream()));
 
             String command = in.readLine();
+            System.out.println(command);
             
             if(command.startsWith("con,"))
                 sod.conNetEvent(ts, parseNetEvent(command.substring(4)));

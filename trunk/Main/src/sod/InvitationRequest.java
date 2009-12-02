@@ -81,6 +81,7 @@ public class InvitationRequest extends javax.swing.JFrame {
     @Action
     public void Accept() {
         SODApp.getApplication().joinChat(chatIp, chatName);
+        this.dispose();
     }
 
     @Action
