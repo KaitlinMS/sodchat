@@ -66,11 +66,15 @@ public class SODApp extends SingleFrameApplication {
     }
 
     public void hostChat(Boolean p, Boolean o, String hostingName, int[] contacts){
-            try {
-                for (int i = 0; i < contacts.length; i++) {
-                    int j = contacts[i];
-                    if (j != -1)netcontroller.Send("col,inv,"+setSet.getUserName()+","+hostingName+",2", concontroller.getAllIps()[j]);
+        try {
+            String[] invitedIps = new String[contacts.length];
+            String[] ips = concontroller.getAllIps();
+            for (int i = 0; i < contacts.length; i++) {
+                int j = contacts[i];
+                invitedIps[i] = ips[i];
+                if (j != -1)netcontroller.Send("col,inv,"+setSet.getUserName()+","+hostingName+",2", concontroller.getAllIps()[j]);
             }
+            colcontroller.hostNew(p, o, hostingName, invitedIps);
         } catch (Exception e) {}
     }
 
@@ -78,7 +82,7 @@ public class SODApp extends SingleFrameApplication {
         try{
             ip = InetAddress.getByName(ip).getHostAddress();
             Socket j = netcontroller.Send("col,jon,"+name+",1" , ip);
-            colcontroller.joinNew(j);
+            colcontroller.joinNew(j, name);
         }catch(Exception e){new ErrorPrompt("Could not join collaboration");}
     }
 
@@ -144,6 +148,10 @@ public class SODApp extends SingleFrameApplication {
             try{
                 s.close();
             }catch(Exception e){}
+        }
+        //Parse a join request
+        else if(event[0].equals("jon")){
+            colcontroller.joinRequest(s, event[1], s.getInetAddress().getHostAddress());
         }
      }
 
