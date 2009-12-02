@@ -1,63 +1,67 @@
+/*
+ * ContactController.java
+ * Handles contact information storage, grouping, and removal
+ */
+
 package Contacts;
 
-public class ContactController{
+public class ContactController {
 
-	/*Variables*/
-	private ContactList clist;
-	
-	public ContactController(){
-		clist = new ContactList();
-	}
+    // Variable declaration
+    private ContactList clist;
 
-        public int getNumContacts(){
-            return clist.getLength();
-        }
+    // Methods
+    public ContactController() {
+        clist = new ContactList();
+    }
 
-	public void addContact(String ip, String cn, String un){
-            Contact c = new Contact(ip, cn);
-            clist.add(c);
-	}
+    public int getNumContacts() {
+        return clist.getLength();
+    }
 
-        public void contactRequest(String ip, String cn){
-            Contact c = new Contact(ip, cn);
-            clist.add(c);
-        }
+    public void addContact(String ip, String cn, String un) {
+        Contact c = new Contact(ip, cn);
+        clist.add(c);
+    }
 
-	public void removeContact(String ip){
-		clist.remove(ip);
-	}
+    public void contactRequest(String ip, String cn) {
+        Contact c = new Contact(ip, cn);
+        clist.add(c);
+    }
 
-	public void removeContact(int i){
-		clist.remove(i);
-	}
+    public void removeContact(String ip) {
+        clist.remove(ip);
+    }
 
-	public void changeName(String ip, String cn){
-            Contact c = new Contact(ip, cn);
-            clist.remove(ip);
-            clist.add(c);
-	}
+    public void removeContact(int i) {
+        clist.remove(i);
+    }
 
-	public String getName(String ip){
-		return clist.getName(ip);
-	}
+    public void changeName(String ip, String cn) {
+        Contact c = new Contact(ip, cn);
+        clist.remove(ip);
+        clist.add(c);
+    }
 
-	public Boolean checkExists(String ip){
-		return clist.search(ip);
-	}
+    public String getName(String ip) {
+        return clist.getName(ip);
+    }
 
-	public String[] getAllNames(){
-		return clist.getAllNames();
-	}
+    public Boolean checkExists(String ip) {
+        return clist.search(ip);
+    }
 
-	public String[] getAllIps(){
-		return clist.getAllIps();
-	}
+    public String[] getAllNames() {
+        return clist.getAllNames();
+    }
 
-        /*Removed to protect the contact list. May need to be added though*/
-        public Contact[] getAllContacts(){
-                return clist.getAll();
-        }
-        
+    public String[] getAllIps() {
+        return clist.getAllIps();
+    }
 
+    // Removed to protect the contact list. May need to be added though
+    public Contact[] getAllContacts() {
+        return clist.getAll();
+    }
 }
 
