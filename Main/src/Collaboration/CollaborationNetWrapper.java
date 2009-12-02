@@ -31,8 +31,6 @@ public class CollaborationNetWrapper {
             out.close();
         } catch (Exception e) {
             new sod.ErrorPrompt("Unable to join collaboration. Check that you entered the correct ip address");
-
-            System.out.println("ERROR");
         }
         return false;
     }
