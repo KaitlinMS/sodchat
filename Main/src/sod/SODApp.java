@@ -176,7 +176,7 @@ public class SODApp extends SingleFrameApplication {
         if (event[0].equals("xfr")) {
             String contactName = event[1];
             String contactIp = s.getInetAddress().getHostAddress();
-            (new FileTransfer(true, contactName, contactIp, event[1], s)).setVisible(true);
+            (new FileTransfer(true, contactName, event[2], s)).setVisible(true);
         }
     }
 }

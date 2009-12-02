@@ -30,7 +30,7 @@
                       <Component id="jLabel5" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="jLabel6" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace pref="76" max="32767" attributes="0"/>
+                      <EmptySpace pref="100" max="32767" attributes="0"/>
                       <Component id="jLabel7" min="-2" pref="150" max="-2" attributes="0"/>
                   </Group>
                   <Component id="jProgressBar1" alignment="1" pref="325" max="32767" attributes="0"/>
@@ -131,7 +131,6 @@
           <action class="sod.FileTransfer" id="sendAccept" methodName="sendAccept"/>
         </Property>
         <Property name="text" type="java.lang.String" resourceKey="jButton2.text"/>
-        <Property name="enabled" type="boolean" value="false"/>
         <Property name="name" type="java.lang.String" value="jButton2" noResource="true"/>
       </Properties>
     </Component>
@@ -163,7 +162,7 @@
     <Component class="javax.swing.JButton" name="jButton3">
       <Properties>
         <Property name="action" type="javax.swing.Action" editor="org.netbeans.modules.swingapp.ActionEditor">
-          <action class="sod.FileTransfer" id="Cancell" methodName="Cancell"/>
+          <action class="sod.FileTransfer" id="Cancel" methodName="Cancel"/>
         </Property>
         <Property name="text" type="java.lang.String" resourceKey="jButton3.text"/>
         <Property name="name" type="java.lang.String" value="jButton3" noResource="true"/>

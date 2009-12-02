@@ -8,39 +8,48 @@
  *
  * Created on 28-Nov-2009, 4:41:46 PM
  */
-
 package sod;
 
 import org.jdesktop.application.Action;
 import javax.swing.*;
 import java.io.*;
 import java.net.*;
-import FileTransfer.FileTransferController;
-
+import FileTransfer.FileTransferNetWrapper;
 
 /**
  *
  * @author Adrian
  */
 public class FileTransfer extends javax.swing.JFrame {
-    private File path;
+
+    private String filePath;
+    private String fileName;
     private boolean incoming;
-    private FileTransferController ftc;
+    private String contactName;
+    private String contactIp;
+    private Socket sock;
 
     //Receiving Tranfer Request
-    public FileTransfer(Boolean inc, String conName, String conIp, String fName, Socket s) {
+    public FileTransfer(Boolean inc, String conName, String fName, Socket s) {
         initComponents();
-        
+        this.setDefaultCloseOperation(this.DO_NOTHING_ON_CLOSE);
+
         incoming = inc;
-        ftc = new FileTransferController(inc, conName, conIp, fName, s);
+        fileName = fName;
+        contactName = conName;
+        contactIp = s.getInetAddress().getHostAddress();
+        sock = s;
     }
 
     //Sending Transfer Request
     public FileTransfer(Boolean inc, String conName, String conIp) {
         initComponents();
+        this.setDefaultCloseOperation(this.DO_NOTHING_ON_CLOSE);
 
         incoming = inc;
-        ftc = new FileTransferController(inc, conName, conIp);
+        contactName = conName;
+        contactIp = conIp;
+
     }
 
     /** This method is called from within the constructor to
@@ -86,7 +95,6 @@ public class FileTransfer extends javax.swing.JFrame {
 
         jButton2.setAction(actionMap.get("sendAccept")); // NOI18N
         jButton2.setText(resourceMap.getString("jButton2.text")); // NOI18N
-        jButton2.setEnabled(false);
         jButton2.setName("jButton2"); // NOI18N
 
         jLabel5.setText(resourceMap.getString("jLabel5.text")); // NOI18N
@@ -102,7 +110,7 @@ public class FileTransfer extends javax.swing.JFrame {
         jTextField1.setEnabled(false);
         jTextField1.setName("jTextField1"); // NOI18N
 
-        jButton3.setAction(actionMap.get("Cancell")); // NOI18N
+        jButton3.setAction(actionMap.get("Cancel")); // NOI18N
         jButton3.setText(resourceMap.getString("jButton3.text")); // NOI18N
         jButton3.setName("jButton3"); // NOI18N
 
@@ -117,7 +125,7 @@ public class FileTransfer extends javax.swing.JFrame {
                         .addComponent(jLabel5)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel6)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 76, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 100, Short.MAX_VALUE)
                         .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jProgressBar1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 325, Short.MAX_VALUE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
@@ -170,27 +178,27 @@ public class FileTransfer extends javax.swing.JFrame {
     @Action
     public void setPath() {
         ///EXAMPLE ONLY -- CODE TO HANDLE PATH IN FOR LOADING FILE
-        if(incoming == false){
-           final JFileChooser fc = new JFileChooser();
-           int returnVal = fc.showOpenDialog(fc);
+        if (incoming == false) {
+            final JFileChooser fc = new JFileChooser();
+            int returnVal = fc.showOpenDialog(fc);
 
             if (returnVal == JFileChooser.APPROVE_OPTION) {
                 File file = fc.getSelectedFile();
-                path = new File(file.getPath());
-                jTextField1.setText(path.toString());
+                filePath = file.getPath();
+                jTextField1.setText(filePath);
                 jButton2.setEnabled(true);
             }
-        }
-        else{
+        } else {
             ///OR DIRECTORY PATH OUT FOR SAVING A FILE
             JFileChooser fc = new JFileChooser();
             fc.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
-            
+
             int returnVal = fc.showSaveDialog(fc);
             if (returnVal == JFileChooser.APPROVE_OPTION) {
                 File file = fc.getSelectedFile();
-                path = new File(file.getPath());
-                jTextField1.setText(path.toString());
+                filePath = file.getPath();
+                fileName = file.getName();
+                jTextField1.setText(filePath);
                 jButton2.setEnabled(true);
             }
         }
@@ -198,11 +206,17 @@ public class FileTransfer extends javax.swing.JFrame {
 
     @Action
     public void sendAccept() {
-        if(incoming){
-
-        }
-        else{
-            
+        if (incoming) {
+            FileTransferNetWrapper ftnw = new FileTransferNetWrapper(incoming, filePath, fileName, sock);
+        } else {
+            try {
+                SODApp sod = SODApp.getApplication();
+                String uname = sod.setSet.getUserName();
+                Socket sock = sod.netcontroller.Send("ftr,xfr," + uname + "," + fileName + ",2", contactIp);
+                FileTransferNetWrapper ftnw = new FileTransferNetWrapper(incoming, filePath, fileName, sock);
+            } catch (Exception e) {
+                new ErrorPrompt("Could not initialize file transfer");
+            }
         }
     }
 
@@ -212,7 +226,21 @@ public class FileTransfer extends javax.swing.JFrame {
         this.dispose();
     }
 
-
+    @Action
+    public void Cancel() {
+        try {
+            if (incoming) {
+                FileTransferNetWrapper.Decline(sock);
+                sock.close();
+                this.dispose();
+            } else {
+                sock.close();
+                this.dispose();
+            }
+        } catch (Exception e) {
+        }
+        ;
+    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
@@ -226,5 +254,4 @@ public class FileTransfer extends javax.swing.JFrame {
     private javax.swing.JProgressBar jProgressBar1;
     private javax.swing.JTextField jTextField1;
     // End of variables declaration//GEN-END:variables
-
 }
