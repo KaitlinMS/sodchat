@@ -17,6 +17,7 @@ public class Collaboration extends Thread{
     private String[] invited;
 
     public Collaboration(Socket s, String name){
+        socketList = new ArrayList();
         //mc = new MessageController();
         mview = new MessageView();
         mview.setVisible(true);
@@ -25,13 +26,15 @@ public class Collaboration extends Thread{
         
     }
 
-    public Collaboration(Boolean p, Boolean o, String name, String[] invited){
+    public Collaboration(Boolean p, Boolean o, String name, String[] inv){
+        socketList = new ArrayList();
         //mc = new MessageController();
         mview = new MessageView();
         mview.setVisible(true);
         Name = name;
         priv = p;
         oct = o;
+        invited = inv;
 
     }
 
@@ -56,6 +59,7 @@ public class Collaboration extends Thread{
     }
 
     public Boolean isInvited(String ip){
+            System.out.println("Handling join request ");
         for(int i = 0; i<invited.length; i++){
             if (ip.equals(invited[i])){
                 return true;
