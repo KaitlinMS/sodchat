@@ -28,4 +28,8 @@ public class Contact {
         public void changeName(String nn){
             name = nn;
         }
+
+        public String toString(){
+            return name + " - " + ip.getHostAddress();
+        }
 }

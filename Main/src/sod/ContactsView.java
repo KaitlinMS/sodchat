@@ -183,7 +183,10 @@ public class ContactsView extends FrameView {
     
 
     public void updateList(){
-        jList1.setListData(SODApp.getApplication().concontroller.getAllNames());
+        //String[] n = SODApp.getApplication().concontroller.getAllNames();
+        //To display just names use n instead
+        Contacts.Contact[] a = SODApp.getApplication().concontroller.getAllContacts();
+        jList1.setListData(a);
     }
 
 }

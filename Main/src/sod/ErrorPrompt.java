@@ -1,4 +1,4 @@
-package Contacts;
+package sod;
 
 /*
  * To change this template, choose Tools | Templates
