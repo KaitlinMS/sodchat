@@ -18,9 +18,9 @@ so the user needs to be able to do the following command at the command line: oc
 
 Links to the two libraries:
 
-JavaOctave:[http://kenai.com/projects/javaoctave/pages/Home]
+[http://kenai.com/projects/javaoctave/pages/Home JavaOctave]
 
-Commons Logging: [http://commons.apache.org/logging/]
+[http://commons.apache.org/logging/ Commons Logging]
 
 Example that works(you may have to redo library adding(see above)):
 [http://code.google.com/p/sodchat/source/browse/#svn/trunk/OctaveExample]
