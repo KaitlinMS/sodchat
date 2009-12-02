@@ -9,6 +9,7 @@ import org.jdesktop.application.SingleFrameApplication;
 import java.net.*;
 
 import Contacts.ContactController;
+import Collaboration.CollaborationController;
 
 /**
  * The main class of the application.
@@ -22,6 +23,7 @@ public class SODApp extends SingleFrameApplication {
 
     public ContactController concontroller;
     public NetworkController netcontroller;
+    public CollaborationController colcontroller;
 
     //Controllers
     /**
@@ -30,6 +32,7 @@ public class SODApp extends SingleFrameApplication {
     @Override protected void startup() {
         concontroller = new ContactController();
         netcontroller = new NetworkController();
+        colcontroller = new CollaborationController();
 
         contacts = new ContactsView(this);
         show(contacts);
@@ -62,18 +65,21 @@ public class SODApp extends SingleFrameApplication {
         launch(SODApp.class, args);
     }
 
-    public void hostChat(Boolean p, Boolean o, int[] contacts){
+    public void hostChat(Boolean p, Boolean o, String hostingName, int[] contacts){
             try {
                 for (int i = 0; i < contacts.length; i++) {
                     int j = contacts[i];
-                    if (j != -1)netcontroller.Send("col,inv,"+setSet.getUserName()+",1", concontroller.getAllIps()[j]);
+                    if (j != -1)netcontroller.Send("col,inv,"+setSet.getUserName()+","+hostingName+",2", concontroller.getAllIps()[j]);
             }
         } catch (Exception e) {}
-        (new MessageView()).setVisible(true);
     }
 
-    public void joinChat(String ip){
-        
+    public void joinChat(String ip, String name){
+        try{
+            ip = InetAddress.getByName(ip).getHostAddress();
+            Socket j = netcontroller.Send("col,jon,"+name+",1" , ip);
+            colcontroller.joinNew(j);
+        }catch(Exception e){new ErrorPrompt("Could not join collaboration");}
     }
 
      public void showTransfer(){
@@ -134,7 +140,7 @@ public class SODApp extends SingleFrameApplication {
      public void colNetEvent(Socket s, String[] event){
         //Invitation to a chat event
         if(event[0].equals("inv")){
-            (new InvitationRequest(event[1], s.getInetAddress().getHostAddress())).setVisible(true);
+            (new InvitationRequest(event[1], s.getInetAddress().getHostAddress(), event[2])).setVisible(true);
             try{
                 s.close();
             }catch(Exception e){}

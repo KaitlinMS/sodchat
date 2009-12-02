@@ -53,11 +53,11 @@ public class ContactController{
 		return clist.getAllIps();
 	}
 
-        /*Removed to protect the contact list. May need to be added though
+        /*Removed to protect the contact list. May need to be added though*/
         public Contact[] getAllContacts(){
                 return clist.getAll();
         }
-        */
+        
 
 }
 

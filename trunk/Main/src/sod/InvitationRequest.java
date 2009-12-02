@@ -4,12 +4,14 @@ import org.jdesktop.application.Action;
 
 public class InvitationRequest extends javax.swing.JFrame {
 
-    String ip;
+    String chatIp;
+    String chatName;
 
-    public InvitationRequest(String name, String i) {
+    public InvitationRequest(String name, String i, String n) {
         initComponents();
         contactName.setText(name);
-        ip = i;
+        chatIp = i;
+        chatName = n;
         this.setDefaultCloseOperation(this.DISPOSE_ON_CLOSE);
     }
 
@@ -78,7 +80,7 @@ public class InvitationRequest extends javax.swing.JFrame {
 
     @Action
     public void Accept() {
-        SODApp.getApplication().joinChat(ip);
+        SODApp.getApplication().joinChat(chatIp, chatName);
     }
 
     @Action
