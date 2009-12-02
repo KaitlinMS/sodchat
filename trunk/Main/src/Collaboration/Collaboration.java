@@ -3,12 +3,13 @@ package Collaboration;
 import java.net.*;
 import sod.MessageView;
 import java.util.ArrayList;
+import sodmessaging.*;
 
 public class Collaboration extends Thread{
 
     //Variables
     private MessageView mview;
-    //MessageController mc;
+    private MessageController mc;
     private ArrayList<Socket> socketList;
     
     private String Name;
@@ -18,9 +19,7 @@ public class Collaboration extends Thread{
 
     public Collaboration(Socket s, String name){
         socketList = new ArrayList();
-        //mc = new MessageController();
-        mview = new MessageView();
-        mview.setVisible(true);
+        mc = new MessageController(socketList);
         socketList.add(s);
         Name = name;
         
@@ -28,9 +27,7 @@ public class Collaboration extends Thread{
 
     public Collaboration(Boolean p, Boolean o, String name, String[] inv){
         socketList = new ArrayList();
-        //mc = new MessageController();
-        mview = new MessageView();
-        mview.setVisible(true);
+        mc = new MessageController(socketList);
         Name = name;
         priv = p;
         oct = o;
@@ -40,6 +37,7 @@ public class Collaboration extends Thread{
 
     public void addMember(Socket s){
         socketList.add(s);
+        mc.addContact(s);
     }
 
     public String toString(){
