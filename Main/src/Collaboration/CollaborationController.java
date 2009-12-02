@@ -13,6 +13,7 @@ public class CollaborationController {
 
     public CollaborationController(){
         collaborations = new ArrayList();
+        cnw = new CollaborationNetWrapper();
 
     }
 
@@ -22,10 +23,10 @@ public class CollaborationController {
 
     public void joinNew(Socket js, String chatName){
         try{
-            System.out.println("Joining");
             Boolean b = cnw.canJoin(js);
             if(b) newCollab(js, chatName);
             else js.close();
+            
         }
         catch(Exception e){}
     }
@@ -35,7 +36,6 @@ public class CollaborationController {
     }
 
     public void newCollab(Socket s, String name){
-        System.out.println("join");
         collaborations.add(new Collaboration(s, name));
     }
 
@@ -43,26 +43,26 @@ public class CollaborationController {
         collaborations.add(new Collaboration(p, o, chatName, ips));
     }
 
-    public void joinRequest(Socket s, String ip, String chatName){
+    public void joinRequest(Socket s, String chatName, String ip){
         Boolean exists = false;
         int i;
         Collaboration collab;
-        for(i = 0; i<collaborations.size(); i++){
-            if ((collab = collaborations.get(i)).toString().equals(chatName)){
+        for(i = 0, collab = collaborations.get(i); i<collaborations.size(); i++, collab = collaborations.get(i)){
+            if (collab.toString().equals(chatName)){
                     exists = true;
                     break;
             }
         }
-            System.out.println("Handling join request" + i);
-        collab = collaborations.get(i);
         if(exists == false){
             cnw.respond(s, "DNE");
         }
-        else if(collab.getPrivate() && collab.isInvited(ip)){
+        else if(collab.getPrivate() && collab.isInvited(ip) != true){
             cnw.respond(s, "PRIVATE");
         }
         else{
+            cnw.respond(s, "ACCEPT");
             collab.addMember(s);
+            System.out.println("kk");
         }
     }
 

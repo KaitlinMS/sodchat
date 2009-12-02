@@ -156,7 +156,9 @@ public class SODApp extends SingleFrameApplication {
      }
 
      public void ftrNetEvent(Socket s, String[] event){
-         System.out.println("File transfer Event");
+         if(event[0].equals("xfr")){
+             System.out.println("File transfer Event");
+         }
      }
 
      

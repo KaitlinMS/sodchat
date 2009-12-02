@@ -5,25 +5,22 @@ import java.io.*;
 
 public class CollaborationNetWrapper {
 
-    PrintWriter out;
-    BufferedReader in;
 
     public CollaborationNetWrapper() {
     }
 
     public Boolean canJoin(Socket s) {
+            System.out.println("Beginning canjoin");
         try {
-            System.out.println("Test");
-            in = new BufferedReader(new InputStreamReader(s.getInputStream()));
-            out = new PrintWriter(s.getOutputStream(), true);
+            BufferedReader in = new BufferedReader(new InputStreamReader(s.getInputStream()));
+            PrintWriter out = new PrintWriter(s.getOutputStream(), true);
 
             s.setSoTimeout(5000);
             String response = in.readLine();
             s.setSoTimeout(0);
-
             if(response.equals("PRIVATE"))
                 new sod.ErrorPrompt("The chat you were trying to join is private");
-            else if(response.equals("Accept")){
+            else if(response.equals("ACCEPT")){
                 in.close();
                 out.close();
                 return true;
@@ -34,6 +31,8 @@ public class CollaborationNetWrapper {
             out.close();
         } catch (Exception e) {
             new sod.ErrorPrompt("Unable to join collaboration. Check that you entered the correct ip address");
+
+            System.out.println("ERROR");
         }
         return false;
     }
@@ -41,8 +40,9 @@ public class CollaborationNetWrapper {
     public void respond(Socket s, String msg){
         try {
             System.out.println("Responding");
-            out = new PrintWriter(s.getOutputStream(), true);
+            PrintWriter out = new PrintWriter(s.getOutputStream(), true);
             out.println(msg);
+            out.close();
         }
         catch(Exception e){}
 
