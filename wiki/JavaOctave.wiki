@@ -11,7 +11,7 @@ The JavaOctave package has two *requirements*:
   # The Commons Logging Api JAR library --this is a dependency
   # The User needs to set the path variable to include the Octave bin directory if in windows
 ----
-so the user needs to be able to do the following command: octave
+so the user needs to be able to do the following command at the command line: octave
 ----
 *To use javaoctave in netbeans:* Under Libraries, click add, click the two JAR files included in the Example code.
 
