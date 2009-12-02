@@ -1,6 +1,6 @@
 /*
  * Contact.java
- * Handles name modifications and IP address retrieval
+ * Data structure that holds the information for contacts
  */
 
 package Contacts;
