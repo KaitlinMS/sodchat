@@ -1,3 +1,8 @@
+/*
+ * FileTransferNetWrapper.java
+ * Handles network connections related to file transfers.
+ */
+
 package FileTransfer;
 
 import java.io.*;
@@ -5,12 +10,14 @@ import java.net.*;
 
 public class FileTransferNetWrapper extends Thread {
 
+    // Variable declarations
     private Boolean incoming;
     private Socket s;
     private String path;
     private String fileName;
     private int progress;
 
+    // Methods
     public FileTransferNetWrapper(Boolean inc, String fpath, String fname, Socket soc) {
         incoming = inc;
         s = soc;
