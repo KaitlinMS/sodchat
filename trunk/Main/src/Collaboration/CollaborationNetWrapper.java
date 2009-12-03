@@ -1,3 +1,8 @@
+/*
+ * CollaborationNetWrapper.java
+ * Handes connections between users for collaborations.
+ */
+
 package Collaboration;
 
 import java.net.*;
@@ -5,7 +10,7 @@ import java.io.*;
 
 public class CollaborationNetWrapper {
 
-
+    // Methods
     public CollaborationNetWrapper() {
     }
 
@@ -17,15 +22,15 @@ public class CollaborationNetWrapper {
             s.setSoTimeout(5000);
             String response = in.readLine();
             s.setSoTimeout(0);
-            if(response.equals("PRIVATE"))
+            if (response.equals("PRIVATE")) {
                 new sod.ErrorPrompt("The chat you were trying to join is private");
-            else if(response.equals("ACCEPT")){
+            } else if (response.equals("ACCEPT")) {
                 in.close();
                 out.close();
                 return true;
-            }
-            else if(response.equals("DNE"))
+            } else if (response.equals("DNE")) {
                 new sod.ErrorPrompt("The chat you were trying to join does not exist");
+            }
             in.close();
             out.close();
         } catch (Exception e) {
@@ -34,13 +39,13 @@ public class CollaborationNetWrapper {
         return false;
     }
 
-    public void respond(Socket s, String msg){
+    public void respond(Socket s, String msg) {
         try {
             PrintWriter out = new PrintWriter(s.getOutputStream(), true);
             out.println(msg);
             out.close();
+        } catch (Exception e) {
         }
-        catch(Exception e){}
 
     }
 
@@ -50,7 +55,6 @@ public class CollaborationNetWrapper {
     public void declineInvite(Socket s) {
     }
 
-    public void joinRequest(String ip, String chatName){
-        
+    public void joinRequest(String ip, String chatName) {
     }
 }

@@ -1,4 +1,9 @@
 /*
+ * ChangeName.java
+ * Creates the name change dialogue box and deals with the inputted values.
+ */
+
+/*
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
