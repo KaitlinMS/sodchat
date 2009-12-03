@@ -43,9 +43,6 @@ public class NetworkController extends Thread{
 
             else if(command.startsWith("ftr,"))
                 sod.ftrNetEvent(ts, parseNetEvent(command.substring(4)));
-            
-            //ss.close();
-            in.close();
 
         }
         catch(Exception e){}

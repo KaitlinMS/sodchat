@@ -25,14 +25,10 @@ public class CollaborationNetWrapper {
             if (response.equals("PRIVATE")) {
                 new sod.ErrorPrompt("The chat you were trying to join is private");
             } else if (response.equals("ACCEPT")) {
-                in.close();
-                out.close();
                 return true;
             } else if (response.equals("DNE")) {
                 new sod.ErrorPrompt("The chat you were trying to join does not exist");
             }
-            in.close();
-            out.close();
         } catch (Exception e) {
             new sod.ErrorPrompt("Unable to join collaboration. Check that you entered the correct ip address");
         }
@@ -43,7 +39,6 @@ public class CollaborationNetWrapper {
         try {
             PrintWriter out = new PrintWriter(s.getOutputStream(), true);
             out.println(msg);
-            out.close();
         } catch (Exception e) {
         }
 
