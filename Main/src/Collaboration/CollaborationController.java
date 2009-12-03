@@ -62,7 +62,6 @@ public class CollaborationController {
         else{
             cnw.respond(s, "ACCEPT");
             collab.addMember(s);
-            System.out.println("kk");
         }
     }
 

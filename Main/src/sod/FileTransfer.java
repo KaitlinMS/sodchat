@@ -39,6 +39,7 @@ public class FileTransfer extends javax.swing.JFrame {
         contactName = conName;
         contactIp = s.getInetAddress().getHostAddress();
         sock = s;
+        setUp();
     }
 
     //Sending Transfer Request
@@ -49,6 +50,20 @@ public class FileTransfer extends javax.swing.JFrame {
         incoming = inc;
         contactName = conName;
         contactIp = conIp;
+        fileName = "";
+        setUp();
+
+    }
+
+    private void setUp() {
+        nameLabel.setText(contactName);
+        ipLabel.setText(contactIp);
+        pathLabel.setText("");
+        if (incoming) {
+            sendAcceptButton.setText("Accept");
+        } else {
+            sendAcceptButton.setText("Send");
+        }
 
     }
 
@@ -62,16 +77,16 @@ public class FileTransfer extends javax.swing.JFrame {
     private void initComponents() {
 
         jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
+        directionLabel = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
+        setButton = new javax.swing.JButton();
         jProgressBar1 = new javax.swing.JProgressBar();
-        jButton2 = new javax.swing.JButton();
+        sendAcceptButton = new javax.swing.JButton();
         jLabel5 = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
-        jLabel7 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        jButton3 = new javax.swing.JButton();
+        nameLabel = new javax.swing.JLabel();
+        ipLabel = new javax.swing.JLabel();
+        pathLabel = new javax.swing.JTextField();
+        cancelButton = new javax.swing.JButton();
 
         setName("Form"); // NOI18N
         setResizable(false);
@@ -80,39 +95,40 @@ public class FileTransfer extends javax.swing.JFrame {
         jLabel1.setText(resourceMap.getString("jLabel1.text")); // NOI18N
         jLabel1.setName("jLabel1"); // NOI18N
 
-        jLabel2.setText(resourceMap.getString("jLabel2.text")); // NOI18N
-        jLabel2.setName("jLabel2"); // NOI18N
+        directionLabel.setText(resourceMap.getString("directionLabel.text")); // NOI18N
+        directionLabel.setName("directionLabel"); // NOI18N
 
         jLabel3.setText(resourceMap.getString("jLabel3.text")); // NOI18N
         jLabel3.setName("jLabel3"); // NOI18N
 
         javax.swing.ActionMap actionMap = org.jdesktop.application.Application.getInstance(sod.SODApp.class).getContext().getActionMap(FileTransfer.class, this);
-        jButton1.setAction(actionMap.get("setPath")); // NOI18N
-        jButton1.setText(resourceMap.getString("jButton1.text")); // NOI18N
-        jButton1.setName("jButton1"); // NOI18N
+        setButton.setAction(actionMap.get("setPath")); // NOI18N
+        setButton.setText(resourceMap.getString("setButton.text")); // NOI18N
+        setButton.setName("setButton"); // NOI18N
 
         jProgressBar1.setName("jProgressBar1"); // NOI18N
 
-        jButton2.setAction(actionMap.get("sendAccept")); // NOI18N
-        jButton2.setText(resourceMap.getString("jButton2.text")); // NOI18N
-        jButton2.setName("jButton2"); // NOI18N
+        sendAcceptButton.setAction(actionMap.get("sendAccept")); // NOI18N
+        sendAcceptButton.setText(resourceMap.getString("sendAcceptButton.text")); // NOI18N
+        sendAcceptButton.setEnabled(false);
+        sendAcceptButton.setName("sendAcceptButton"); // NOI18N
 
         jLabel5.setText(resourceMap.getString("jLabel5.text")); // NOI18N
         jLabel5.setName("jLabel5"); // NOI18N
 
-        jLabel6.setText(resourceMap.getString("jLabel6.text")); // NOI18N
-        jLabel6.setName("jLabel6"); // NOI18N
+        nameLabel.setText(resourceMap.getString("nameLabel.text")); // NOI18N
+        nameLabel.setName("nameLabel"); // NOI18N
 
-        jLabel7.setText(resourceMap.getString("jLabel7.text")); // NOI18N
-        jLabel7.setName("jLabel7"); // NOI18N
+        ipLabel.setText(resourceMap.getString("ipLabel.text")); // NOI18N
+        ipLabel.setName("ipLabel"); // NOI18N
 
-        jTextField1.setText(resourceMap.getString("jTextField1.text")); // NOI18N
-        jTextField1.setEnabled(false);
-        jTextField1.setName("jTextField1"); // NOI18N
+        pathLabel.setText(resourceMap.getString("pathLabel.text")); // NOI18N
+        pathLabel.setEnabled(false);
+        pathLabel.setName("pathLabel"); // NOI18N
 
-        jButton3.setAction(actionMap.get("Cancel")); // NOI18N
-        jButton3.setText(resourceMap.getString("jButton3.text")); // NOI18N
-        jButton3.setName("jButton3"); // NOI18N
+        cancelButton.setAction(actionMap.get("Cancel")); // NOI18N
+        cancelButton.setText(resourceMap.getString("cancelButton.text")); // NOI18N
+        cancelButton.setName("cancelButton"); // NOI18N
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -124,26 +140,26 @@ public class FileTransfer extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel5)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel6)
+                        .addComponent(nameLabel)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 100, Short.MAX_VALUE)
-                        .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jProgressBar1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 325, Short.MAX_VALUE)
+                        .addComponent(ipLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jProgressBar1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 349, Short.MAX_VALUE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel1)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jLabel2))
+                                .addComponent(directionLabel))
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel3)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jTextField1, javax.swing.GroupLayout.DEFAULT_SIZE, 242, Short.MAX_VALUE))
+                                .addComponent(pathLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 266, Short.MAX_VALUE))
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(jButton2)
+                                .addComponent(sendAcceptButton)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(cancelButton, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton1)))
+                        .addComponent(setButton)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -152,21 +168,21 @@ public class FileTransfer extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
-                    .addComponent(jLabel6)
-                    .addComponent(jLabel7))
+                    .addComponent(nameLabel)
+                    .addComponent(ipLabel))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
-                    .addComponent(jLabel2))
+                    .addComponent(directionLabel))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
-                    .addComponent(jButton1)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(setButton)
+                    .addComponent(pathLabel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton2)
-                    .addComponent(jButton3))
+                    .addComponent(sendAcceptButton)
+                    .addComponent(cancelButton))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jProgressBar1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -185,8 +201,9 @@ public class FileTransfer extends javax.swing.JFrame {
             if (returnVal == JFileChooser.APPROVE_OPTION) {
                 File file = fc.getSelectedFile();
                 filePath = file.getPath();
-                jTextField1.setText(filePath);
-                jButton2.setEnabled(true);
+                fileName = file.getName();
+                pathLabel.setText(filePath);
+                sendAcceptButton.setEnabled(true);
             }
         } else {
             ///OR DIRECTORY PATH OUT FOR SAVING A FILE
@@ -197,9 +214,8 @@ public class FileTransfer extends javax.swing.JFrame {
             if (returnVal == JFileChooser.APPROVE_OPTION) {
                 File file = fc.getSelectedFile();
                 filePath = file.getPath();
-                fileName = file.getName();
-                jTextField1.setText(filePath);
-                jButton2.setEnabled(true);
+                pathLabel.setText(filePath);
+                sendAcceptButton.setEnabled(true);
             }
         }
     }
@@ -208,12 +224,14 @@ public class FileTransfer extends javax.swing.JFrame {
     public void sendAccept() {
         if (incoming) {
             FileTransferNetWrapper ftnw = new FileTransferNetWrapper(incoming, filePath, fileName, sock);
+            ftnw.start();
         } else {
             try {
                 SODApp sod = SODApp.getApplication();
                 String uname = sod.setSet.getUserName();
                 Socket sock = sod.netcontroller.Send("ftr,xfr," + uname + "," + fileName + ",2", contactIp);
                 FileTransferNetWrapper ftnw = new FileTransferNetWrapper(incoming, filePath, fileName, sock);
+                ftnw.start();
             } catch (Exception e) {
                 new ErrorPrompt("Could not initialize file transfer");
             }
@@ -234,24 +252,25 @@ public class FileTransfer extends javax.swing.JFrame {
                 sock.close();
                 this.dispose();
             } else {
-                sock.close();
+                //sock.close();
                 this.dispose();
             }
         } catch (Exception e) {
+            //this.dispose();
         }
         ;
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
+    private javax.swing.JButton cancelButton;
+    private javax.swing.JLabel directionLabel;
+    private javax.swing.JLabel ipLabel;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
     private javax.swing.JProgressBar jProgressBar1;
-    private javax.swing.JTextField jTextField1;
+    private javax.swing.JLabel nameLabel;
+    private javax.swing.JTextField pathLabel;
+    private javax.swing.JButton sendAcceptButton;
+    private javax.swing.JButton setButton;
     // End of variables declaration//GEN-END:variables
 }

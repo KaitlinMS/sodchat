@@ -101,7 +101,7 @@ public class SODApp extends SingleFrameApplication {
         if(contacts.jList1.isSelectionEmpty() != true){
             String contactIp = concontroller.getAllIps()[contacts.jList1.getSelectedIndex()];
             String contactName = concontroller.getName(contactIp);
-            (new FileTransfer(false, contactIp, contactName)).setVisible(true);
+            (new FileTransfer(false, contactName, contactIp)).setVisible(true);
         }
     }
 
@@ -175,8 +175,8 @@ public class SODApp extends SingleFrameApplication {
     public void ftrNetEvent(Socket s, String[] event) {
         if (event[0].equals("xfr")) {
             String contactName = event[1];
-            String contactIp = s.getInetAddress().getHostAddress();
-            (new FileTransfer(true, contactName, event[2], s)).setVisible(true);
+            String fileName = event[2];
+            (new FileTransfer(true, contactName, fileName, s)).setVisible(true);
         }
     }
 }

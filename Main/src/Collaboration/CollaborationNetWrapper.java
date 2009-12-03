@@ -10,7 +10,6 @@ public class CollaborationNetWrapper {
     }
 
     public Boolean canJoin(Socket s) {
-            System.out.println("Beginning canjoin");
         try {
             BufferedReader in = new BufferedReader(new InputStreamReader(s.getInputStream()));
             PrintWriter out = new PrintWriter(s.getOutputStream(), true);
@@ -37,7 +36,6 @@ public class CollaborationNetWrapper {
 
     public void respond(Socket s, String msg){
         try {
-            System.out.println("Responding");
             PrintWriter out = new PrintWriter(s.getOutputStream(), true);
             out.println(msg);
             out.close();
