@@ -61,8 +61,10 @@ public class FileTransfer extends javax.swing.JFrame {
         pathLabel.setText("");
         if (incoming) {
             sendAcceptButton.setText("Accept");
+            directionLabel.setText("Imcoming file: " + fileName);
         } else {
             sendAcceptButton.setText("Send");
+            directionLabel.setText("Outgoing");
         }
 
     }
@@ -225,15 +227,19 @@ public class FileTransfer extends javax.swing.JFrame {
         if (incoming) {
             FileTransferNetWrapper ftnw = new FileTransferNetWrapper(incoming, filePath, fileName, sock);
             ftnw.start();
+            sendAcceptButton.setEnabled(false);
+
         } else {
             try {
                 SODApp sod = SODApp.getApplication();
                 String uname = sod.setSet.getUserName();
-                Socket sock = sod.netcontroller.Send("ftr,xfr," + uname + "," + fileName + ",2", contactIp);
+                sock = sod.netcontroller.Send("ftr,xfr," + uname + "," + fileName + ",2", contactIp);
                 FileTransferNetWrapper ftnw = new FileTransferNetWrapper(incoming, filePath, fileName, sock);
                 ftnw.start();
+                sendAcceptButton.setEnabled(false);
             } catch (Exception e) {
                 new ErrorPrompt("Could not initialize file transfer");
+                this.dispose();
             }
         }
     }
