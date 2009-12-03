@@ -63,12 +63,27 @@ public class FileTransfer extends javax.swing.JFrame {
         pathLabel.setText("");
         if (incoming) {
             sendAcceptButton.setText("Accept");
-            directionLabel.setText("Imcoming file: " + fileName);
+            directionLabel.setText("Imcoming");
         } else {
             sendAcceptButton.setText("Send");
             directionLabel.setText("Outgoing");
         }
 
+    }
+
+    public void begin(){
+        sendAcceptButton.setEnabled(false);
+        setButton.setEnabled(false);
+        progress.setIndeterminate(true);
+
+    }
+
+    public void complete(){
+        progress.setIndeterminate(false);
+        progress.setString("Transfer Complete");
+        progress.setValue(100);
+        cancelButton.setText("Ok");
+        
     }
 
     /** This method is called from within the constructor to
@@ -84,7 +99,7 @@ public class FileTransfer extends javax.swing.JFrame {
         directionLabel = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         setButton = new javax.swing.JButton();
-        jProgressBar1 = new javax.swing.JProgressBar();
+        progress = new javax.swing.JProgressBar();
         sendAcceptButton = new javax.swing.JButton();
         jLabel5 = new javax.swing.JLabel();
         nameLabel = new javax.swing.JLabel();
@@ -110,10 +125,11 @@ public class FileTransfer extends javax.swing.JFrame {
         setButton.setText(resourceMap.getString("setButton.text")); // NOI18N
         setButton.setName("setButton"); // NOI18N
 
-        jProgressBar1.setName("jProgressBar1"); // NOI18N
+        progress.setName("progress"); // NOI18N
 
         sendAcceptButton.setAction(actionMap.get("sendAccept")); // NOI18N
         sendAcceptButton.setText(resourceMap.getString("sendAcceptButton.text")); // NOI18N
+        sendAcceptButton.setEnabled(false);
         sendAcceptButton.setName("sendAcceptButton"); // NOI18N
 
         jLabel5.setText(resourceMap.getString("jLabel5.text")); // NOI18N
@@ -146,13 +162,9 @@ public class FileTransfer extends javax.swing.JFrame {
                         .addComponent(nameLabel)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 100, Short.MAX_VALUE)
                         .addComponent(ipLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jProgressBar1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 349, Short.MAX_VALUE)
+                    .addComponent(progress, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 349, Short.MAX_VALUE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel1)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(directionLabel))
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel3)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -162,7 +174,11 @@ public class FileTransfer extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(cancelButton, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(setButton)))
+                        .addComponent(setButton))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(directionLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 282, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -187,7 +203,7 @@ public class FileTransfer extends javax.swing.JFrame {
                     .addComponent(sendAcceptButton)
                     .addComponent(cancelButton))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jProgressBar1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(progress, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -226,18 +242,16 @@ public class FileTransfer extends javax.swing.JFrame {
     @Action
     public void sendAccept() {
         if (incoming) {
-            FileTransferNetWrapper ftnw = new FileTransferNetWrapper(incoming, filePath, fileName, sock);
+            FileTransferNetWrapper ftnw = new FileTransferNetWrapper(incoming, filePath, fileName, sock, this);
             ftnw.start();
-            sendAcceptButton.setEnabled(false);
 
         } else {
             try {
                 SODApp sod = SODApp.getApplication();
                 String uname = sod.setSet.getUserName();
                 sock = sod.netcontroller.Send("ftr,xfr," + uname + "," + fileName + ",2", contactIp);
-                FileTransferNetWrapper ftnw = new FileTransferNetWrapper(incoming, filePath, fileName, sock);
+                FileTransferNetWrapper ftnw = new FileTransferNetWrapper(incoming, filePath, fileName, sock, this);
                 ftnw.start();
-                sendAcceptButton.setEnabled(false);
             } catch (Exception e) {
                 new ErrorPrompt("Could not initialize file transfer");
                 this.dispose();
@@ -274,9 +288,9 @@ public class FileTransfer extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel5;
-    private javax.swing.JProgressBar jProgressBar1;
     private javax.swing.JLabel nameLabel;
     private javax.swing.JTextField pathLabel;
+    private javax.swing.JProgressBar progress;
     private javax.swing.JButton sendAcceptButton;
     private javax.swing.JButton setButton;
     // End of variables declaration//GEN-END:variables
