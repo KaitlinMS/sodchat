@@ -24,17 +24,17 @@ public class FileTransferNetWrapper extends Thread {
 
     public void Accept() {
         try {
+            System.out.println("Test");
             // set buffer size to 1 kb
             byte fileBuffer[] = new byte[1024];
 
-            // connect to specified port by default it is 2345
             InputStream in = s.getInputStream();
-
             PrintWriter out = new PrintWriter(s.getOutputStream(), true);
             out.println("ACCEPT");
 
             // save as the specified filename
-            FileOutputStream saveFile = new FileOutputStream(path + fileName);
+            System.out.println("RRRRR " + path + fileName);
+            FileOutputStream saveFile = new FileOutputStream(new File(path + fileName));
 
             // timer
             long startTime = System.currentTimeMillis();
@@ -50,7 +50,7 @@ public class FileTransferNetWrapper extends Thread {
 
             // get file size, time and speed
             // file size
-            File temp = new File(path);
+            File temp = new File(path + fileName);
             long fileSize = temp.length();
             long endTime = System.currentTimeMillis();
             // calculate elapsed time
@@ -79,13 +79,16 @@ public class FileTransferNetWrapper extends Thread {
             byte fileBuffer[] = new byte[1024];
 
             // pass specified file into stream
-            FileInputStream file = new FileInputStream(path);
-            OutputStream out = s.getOutputStream();
+            FileInputStream file = new FileInputStream(new File(path));
 
             BufferedReader in = new BufferedReader(new InputStreamReader(s.getInputStream()));
-            String response = in.readLine();
+            String response;
+            response = in.readLine();
+            System.out.println("SSSSSSSS " + response);
 
             if (response.equals("ACCEPT")) {
+
+                OutputStream out = s.getOutputStream();
 
                 //transfering the file
                 int size;
@@ -96,15 +99,17 @@ public class FileTransferNetWrapper extends Thread {
             }
             s.close();
         } catch (Exception e) {
-            new sod.ErrorPrompt("An Error occured while transferring the file");
+            new sod.ErrorPrompt("There was an error while sending the file");
         }
 
     }
 
     public void run() {
         if (incoming) {
+            System.out.println("recieving");
             Accept();
         } else {
+            System.out.println("sending");
             Send();
         }
     }
