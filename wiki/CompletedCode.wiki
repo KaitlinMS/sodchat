@@ -6,3 +6,7 @@ Please list your classes or packages that are complete so that Kaitlin may begin
 
 = Completed Stuff =
   * Contacts package
+  * Collaboration package
+  * File Transfer package
+  * SODApp packages
+  * Network Controller
