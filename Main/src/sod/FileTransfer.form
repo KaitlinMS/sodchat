@@ -33,14 +33,9 @@
                       <EmptySpace pref="100" max="32767" attributes="0"/>
                       <Component id="ipLabel" min="-2" pref="150" max="-2" attributes="0"/>
                   </Group>
-                  <Component id="jProgressBar1" alignment="1" pref="349" max="32767" attributes="0"/>
+                  <Component id="progress" alignment="1" pref="349" max="32767" attributes="0"/>
                   <Group type="102" alignment="1" attributes="0">
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="102" alignment="0" attributes="0">
-                              <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Component id="directionLabel" min="-2" max="-2" attributes="0"/>
-                          </Group>
                           <Group type="102" alignment="0" attributes="0">
                               <Component id="jLabel3" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
@@ -54,6 +49,11 @@
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="setButton" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <Group type="102" attributes="0">
+                      <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="directionLabel" pref="282" max="32767" attributes="0"/>
                   </Group>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
@@ -86,7 +86,7 @@
                   <Component id="cancelButton" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
-              <Component id="jProgressBar1" min="-2" max="-2" attributes="0"/>
+              <Component id="progress" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="32767" attributes="0"/>
           </Group>
       </Group>
@@ -120,9 +120,9 @@
         <Property name="name" type="java.lang.String" value="setButton" noResource="true"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JProgressBar" name="jProgressBar1">
+    <Component class="javax.swing.JProgressBar" name="progress">
       <Properties>
-        <Property name="name" type="java.lang.String" value="jProgressBar1" noResource="true"/>
+        <Property name="name" type="java.lang.String" value="progress" noResource="true"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JButton" name="sendAcceptButton">
@@ -131,6 +131,7 @@
           <action class="sod.FileTransfer" id="sendAccept" methodName="sendAccept"/>
         </Property>
         <Property name="text" type="java.lang.String" resourceKey="sendAcceptButton.text"/>
+        <Property name="enabled" type="boolean" value="false"/>
         <Property name="name" type="java.lang.String" value="sendAcceptButton" noResource="true"/>
       </Properties>
     </Component>

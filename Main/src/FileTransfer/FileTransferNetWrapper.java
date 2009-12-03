@@ -5,6 +5,7 @@
 
 package FileTransfer;
 
+import sod.FileTransfer;
 import java.io.*;
 import java.net.*;
 
@@ -15,19 +16,16 @@ public class FileTransferNetWrapper extends Thread {
     private Socket s;
     private String path;
     private String fileName;
-    private int progress;
+    private FileTransfer fileTrans;
 
     // Methods
-    public FileTransferNetWrapper(Boolean inc, String fpath, String fname, Socket soc) {
+    public FileTransferNetWrapper(Boolean inc, String fpath, String fname, Socket soc, FileTransfer ft){
         incoming = inc;
         s = soc;
         path = fpath;
         fileName = fname;
-    }
-
-    public int getProgress() {
-        return progress;
-    }
+        fileTrans = ft;
+    }   
 
     public void Accept() {
         try {
@@ -39,10 +37,8 @@ public class FileTransferNetWrapper extends Thread {
             out.println("ACCEPT");
 
             // save as the specified filename
-            FileOutputStream saveFile = new FileOutputStream(new File(path + "/" + fileName));
-
-            // timer
-            long startTime = System.currentTimeMillis();
+            File recFile = new File(path + "/" + fileName);
+            FileOutputStream saveFile = new FileOutputStream(recFile);
 
             // write into file (saveFile)
             int size;
@@ -53,8 +49,10 @@ public class FileTransferNetWrapper extends Thread {
             s.close();
             saveFile.close();
             out.close();
+            fileTrans.complete();
         } catch (Exception e) {
             new sod.ErrorPrompt("An error occured while recieving a file");
+
         }
     }
 
@@ -73,13 +71,13 @@ public class FileTransferNetWrapper extends Thread {
             byte fileBuffer[] = new byte[1024];
 
             // pass specified file into stream
-            FileInputStream file = new FileInputStream(new File(path));
+            File sendFile = new File(path);
+            FileInputStream file = new FileInputStream(sendFile);
 
             BufferedReader in = new BufferedReader(new InputStreamReader(s.getInputStream()));
             String response = in.readLine();
 
             if (response.equals("ACCEPT")) {
-
                 OutputStream out = s.getOutputStream();
 
                 //transfering the file
@@ -91,6 +89,7 @@ public class FileTransferNetWrapper extends Thread {
             }
             s.close();
             in.close();
+            fileTrans.complete();
         } catch (Exception e) {
             new sod.ErrorPrompt("There was an error while sending the file");
         }
@@ -99,10 +98,8 @@ public class FileTransferNetWrapper extends Thread {
 
     public void run() {
         if (incoming) {
-            System.out.println("recieving");
             Accept();
         } else {
-            System.out.println("sending");
             Send();
         }
     }
