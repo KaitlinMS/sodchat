@@ -10,6 +10,8 @@
  */
 package sod;
 
+import FileTransfer.*;
+import sod.*;
 import org.jdesktop.application.Action;
 import javax.swing.*;
 import java.io.*;
@@ -112,7 +114,6 @@ public class FileTransfer extends javax.swing.JFrame {
 
         sendAcceptButton.setAction(actionMap.get("sendAccept")); // NOI18N
         sendAcceptButton.setText(resourceMap.getString("sendAcceptButton.text")); // NOI18N
-        sendAcceptButton.setEnabled(false);
         sendAcceptButton.setName("sendAcceptButton"); // NOI18N
 
         jLabel5.setText(resourceMap.getString("jLabel5.text")); // NOI18N
