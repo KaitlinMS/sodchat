@@ -10,6 +10,7 @@ import java.io.*;
 
 import Contacts.ContactController;
 import Collaboration.CollaborationController;
+import FileTransfer.FileTransferController;
 
 /**
  * The main class of the application.
@@ -29,7 +30,7 @@ public class SODApp extends SingleFrameApplication {
      */
     @Override
     protected void startup() {
-        
+
         concontroller = new ContactController();
         netcontroller = new NetworkController();
         colcontroller = new CollaborationController();
@@ -39,26 +40,29 @@ public class SODApp extends SingleFrameApplication {
         setSet.setVisible(false);
         //showSettings();
         setAdd = new NewContact();
-        try{
-        BufferedReader dataFileIn = new BufferedReader(new FileReader("username.dat"));
-        String name = dataFileIn.readLine();
-        if (name != null)
-        setSet.changeUserName (name);
-        dataFileIn.close();
+        try {
+            BufferedReader dataFileIn = new BufferedReader(new FileReader("username.dat"));
+            String name = dataFileIn.readLine();
+            if (name != null) {
+                setSet.changeUserName(name);
+            }
+            dataFileIn.close();
+        } catch (IOException e) {
+            System.out.println(e);
         }
-        catch (IOException e) {System.out.println(e);}
         if (setSet.getUserName().equals("Default User")) {
             setSet.setVisible(true);
         }
-        try{
-        BufferedReader dataFileIn = new BufferedReader(new FileReader("contactlist.dat"));
-        String savedContact;
-        while ((savedContact = dataFileIn.readLine()) != null){
-            addContact(savedContact);
+        try {
+            BufferedReader dataFileIn = new BufferedReader(new FileReader("contactlist.dat"));
+            String savedContact;
+            while ((savedContact = dataFileIn.readLine()) != null) {
+                addContact(savedContact);
+            }
+            dataFileIn.close();
+        } catch (IOException e) {
+            System.out.println(e);
         }
-        dataFileIn.close();
-        }
-        catch (IOException e) {System.out.println(e);}
     }
 
     /**
@@ -84,6 +88,48 @@ public class SODApp extends SingleFrameApplication {
     public static void main(String[] args) {
         launch(SODApp.class, args);
     }
+
+    //-------------Contact Methods-----------------
+
+    public void showAdd() {
+        setAdd.setVisible(true);
+    }
+    
+    public void addContact(String IP) {
+        concontroller.addContact(IP);
+        contacts.updateList();
+        try {
+            netcontroller.Send("con,req," + setSet.getUserName() + ",1", IP);
+        } catch (Exception e) {
+        }
+    }
+
+    public void removeContact(int i) {
+        if (i != -1) {
+            concontroller.removeContact(i);
+        }
+        contacts.updateList();
+    }
+
+    public void conNetEvent(Socket s, String[] event) {
+
+        //Incoming contact request event
+        if (event[0].equals("req")) {
+            concontroller.contactRequest(s.getInetAddress().getHostAddress(), event[1]);
+            contacts.updateList();
+            try {
+                netcontroller.Send("con,rep," + setSet.getUserName() + ",1", s.getInetAddress().getHostAddress());
+                s.close();
+            } catch (Exception e) {
+            }
+        }
+        if (event[0].equals("rep")) {
+            concontroller.contactRequest(s.getInetAddress().getHostAddress(), event[1]);
+            contacts.updateList();
+        }
+    }
+
+    //--------------Collaboration Methods---------------------
 
     public void showDiscuss() {
         (new DiscussionView(concontroller.getAllNames())).setVisible(true);
@@ -119,55 +165,6 @@ public class SODApp extends SingleFrameApplication {
         }
     }
 
-    public void showTransfer() {
-        if(contacts.jList1.isSelectionEmpty() != true){
-            String contactIp = concontroller.getAllIps()[contacts.jList1.getSelectedIndex()];
-            String contactName = concontroller.getName(contactIp);
-            (new FileTransfer(false, contactName, contactIp)).setVisible(true);
-        }
-    }
-
-    public void showAdd() {
-        setAdd.setVisible(true);
-    }
-
-    public void showSettings() {
-        setSet.setVisible(true);
-    }
-
-    public void addContact(String IP) {
-        concontroller.addContact(IP);
-        contacts.updateList();
-        try {
-            netcontroller.Send("con,req," + setSet.getUserName() + ",1", IP);
-        } catch (Exception e) {
-        }
-    }
-
-    public void removeContact(int i) {
-        if (i != -1) {
-            concontroller.removeContact(i);
-        }
-        contacts.updateList();
-    }
-
-    public void conNetEvent(Socket s, String[] event) {
-
-        //Incoming contact request event
-        if (event[0].equals("req")) {
-            concontroller.contactRequest(s.getInetAddress().getHostAddress(), event[1]);
-            contacts.updateList();
-            try {
-                s.close();
-            } catch (Exception e) {
-            }
-        }
-    }
-
-    public void msgNetEvent(Socket s, String[] event) {
-        System.out.println("Message Event");
-    }
-
     public void colNetEvent(Socket s, String[] event) {
         //Invitation to a chat event
         //Arguments: 1 - Other users name, 2 - Chat Name
@@ -183,11 +180,27 @@ public class SODApp extends SingleFrameApplication {
         }
     }
 
+    //-------------File Transfer Methods--------------
+
+    public void showTransfer() {
+        if (contacts.jList1.isSelectionEmpty() != true) {
+            String contactIp = concontroller.getAllIps()[contacts.jList1.getSelectedIndex()];
+            String contactName = concontroller.getName(contactIp);
+            (new FileTransferController(false, contactName, contactIp)).setVisible(true);
+        }
+    }
+
     public void ftrNetEvent(Socket s, String[] event) {
         if (event[0].equals("xfr")) {
             String contactName = event[1];
             String fileName = event[2];
-            (new FileTransfer(true, contactName, fileName, s)).setVisible(true);
+            (new FileTransferController(true, contactName, fileName, s)).setVisible(true);
         }
+    }
+
+    //--------------Settings Methods--------------------
+
+    public void showSettings() {
+        setSet.setVisible(true);
     }
 }

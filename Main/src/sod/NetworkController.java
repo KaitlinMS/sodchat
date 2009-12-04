@@ -34,9 +34,6 @@ public class NetworkController extends Thread{
             if(command.startsWith("con,"))
                 sod.conNetEvent(ts, parseNetEvent(command.substring(4)));
 
-            else if(command.startsWith("msg,"))
-                sod.msgNetEvent(ts, parseNetEvent(command.substring(4)));
-
             else if(command.startsWith("col,")){
                 sod.colNetEvent(ts, parseNetEvent(command.substring(4)));
             }

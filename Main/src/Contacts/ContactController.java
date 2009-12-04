@@ -21,9 +21,9 @@ public class ContactController {
     }
 
     public void addContact(String ip) {
-        Contact c = new Contact(ip, "Unconfirmed Contact");
-        clist.add(c);
-        saveContactList ();
+        //Contact c = new Contact(ip, "Unconfirmed Contact");
+        //clist.add(c);
+        //saveContactList ();
     }
 
     public void contactRequest(String ip, String cn) {
