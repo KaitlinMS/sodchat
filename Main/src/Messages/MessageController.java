@@ -3,13 +3,19 @@ import java.util.ArrayList;
 import org.jdesktop.application.Action;
 import sod.SODApp;
 import java.net.*;
+import java.io.*;
+import dk.ange.octave.*;
 
 public class MessageController extends javax.swing.JFrame {
 
     private ArrayList<Socket> socketList;
-
+    private StringWriter octaveWriter;
+    private boolean octaveEnabled;
+    private OctaveEngine octave;
+    
     public MessageController(ArrayList<Socket> sockets) {
         initComponents();
+        octaveEnabled = false;
         socketList = sockets;
         for(int i = 0; i < socketList.size(); i++){
             (new MessageNetWrapper(socketList.get(i), this)).start();
@@ -28,6 +34,20 @@ public class MessageController extends javax.swing.JFrame {
     public void receiveMsg(String msg, Socket fromSocket){
         chatPane.setText(chatPane.getText().concat(msg) + "\n");
         MessageNetWrapper.sendMessage(socketList, fromSocket, msg);
+        if (octaveEnabled == true){
+            if (msg.startsWith("!")){
+                octave.eval(msg.substring(1));
+                chatPane.setText(chatPane.getText().concat(octaveWriter.toString()) + "\n");
+                octaveWriter.flush();
+            }
+        }
+    }
+
+    public void initOctave(){
+        octaveEnabled = true;
+        octave = new OctaveEngineFactory().getScriptEngine();
+        octaveWriter = new StringWriter();
+        octave.setWriter(octaveWriter);
     }
 
     /** This method is called from within the constructor to
