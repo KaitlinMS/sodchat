@@ -7,18 +7,24 @@ import java.util.ArrayList;
 public class MessageNetWrapper extends Thread {
 
     Socket soc;
+    BufferedReader in;
     MessageController mcontroller;
     Boolean Alive;
 
     public MessageNetWrapper(Socket s, MessageController mc) {
-        soc = s;
-        mcontroller = mc;
-        Alive = true;
+        try {
+            soc = s;
+            mcontroller = mc;
+            in = new BufferedReader(new InputStreamReader(soc.getInputStream()));
+            Alive = true;
+        } catch (Exception e) {
+            mcontroller.removeSocket(soc);
+            Alive = false;
+        }
     }
 
     public void receiveMessage() {
         try {
-            BufferedReader in = new BufferedReader(new InputStreamReader(soc.getInputStream()));
             String incMsg = in.readLine();
             if (incMsg == null) {
                 mcontroller.removeSocket(soc);
@@ -50,6 +56,7 @@ public class MessageNetWrapper extends Thread {
         }
         try {
             soc.close();
+            in.close();
         } catch (Exception e) {
         }
     }

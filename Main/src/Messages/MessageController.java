@@ -34,21 +34,25 @@ public class MessageController extends javax.swing.JFrame {
     public void receiveMsg(String msg, Socket fromSocket){
         chatPane.setText(chatPane.getText().concat(msg) + "\n");
         MessageNetWrapper.sendMessage(socketList, fromSocket, msg);
-        if (octaveEnabled == true){
-            if (msg.startsWith("!")){
-                octave.eval(msg.substring(1));
-                chatPane.setText(chatPane.getText().concat(octaveWriter.toString()) + "\n");
-                MessageNetWrapper.sendMessage(socketList, fromSocket, octaveWriter.toString());
-                octaveWriter.flush();
-            }
-        }
+        if (octaveEnabled == true)
+            evalOctave(msg);
     }
 
     public void initOctave(){
         octaveEnabled = true;
         octave = new OctaveEngineFactory().getScriptEngine();
-        octaveWriter = new StringWriter();
-        octave.setWriter(octaveWriter);
+    }
+
+    public void evalOctave(String msg){
+        int i = msg.indexOf(": !");
+        if(i != -1)msg = msg.substring(i+2);
+        if (msg.startsWith("!")){
+            octaveWriter = new StringWriter();
+            octave.setWriter(octaveWriter);
+            octave.eval(msg.substring(1));
+            chatPane.setText(chatPane.getText().concat(octaveWriter.toString()) + "\n");
+            MessageNetWrapper.sendMessage(socketList, null, octaveWriter.toString() + "\n");
+        }
     }
 
     /** This method is called from within the constructor to
@@ -82,6 +86,11 @@ public class MessageController extends javax.swing.JFrame {
 
         messageField.setText(resourceMap.getString("messageField.text")); // NOI18N
         messageField.setName("messageField"); // NOI18N
+        messageField.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                messageFieldKeyPressed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -90,9 +99,9 @@ public class MessageController extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 415, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 425, Short.MAX_VALUE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(messageField, javax.swing.GroupLayout.DEFAULT_SIZE, 358, Short.MAX_VALUE)
+                        .addComponent(messageField, javax.swing.GroupLayout.DEFAULT_SIZE, 368, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(sendButton)))
                 .addContainerGap())
@@ -111,23 +120,21 @@ public class MessageController extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void messageFieldKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_messageFieldKeyPressed
+        if(evt.getKeyCode() == evt.VK_ENTER)
+            if(messageField.getText().length() > 0)
+                Send();
+    }//GEN-LAST:event_messageFieldKeyPressed
+
     @Action
     public void Send() {
         SODApp sod = SODApp.getApplication();
-        String msgOctave = messageField.getText();
         String msgSend = sod.setSet.getUserName() + ": " + messageField.getText() + "\n";
         messageField.setText("");
         chatPane.setText(chatPane.getText().concat(msgSend));
         MessageNetWrapper.sendMessage(socketList, null, msgSend);
-        //decompose message -without name:
-        if (octaveEnabled == true){
-            if (msgOctave.startsWith("!")){
-                    octave.eval(msgOctave.substring(1));
-                    chatPane.setText(chatPane.getText().concat(octaveWriter.toString()) + "\n");
-                    MessageNetWrapper.sendMessage(socketList, null, octaveWriter.toString());
-                    octaveWriter.flush();
-            }
-       }
+        if (octaveEnabled == true)
+            evalOctave(msgSend);
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
