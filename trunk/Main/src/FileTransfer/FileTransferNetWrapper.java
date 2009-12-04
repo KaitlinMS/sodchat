@@ -5,7 +5,6 @@
 
 package FileTransfer;
 
-import sod.FileTransfer;
 import java.io.*;
 import java.net.*;
 
@@ -16,10 +15,10 @@ public class FileTransferNetWrapper extends Thread {
     private Socket s;
     private String path;
     private String fileName;
-    private FileTransfer fileTrans;
+    private FileTransferController fileTrans;
 
     // Methods
-    public FileTransferNetWrapper(Boolean inc, String fpath, String fname, Socket soc, FileTransfer ft){
+    public FileTransferNetWrapper(Boolean inc, String fpath, String fname, Socket soc, FileTransferController ft){
         incoming = inc;
         s = soc;
         path = fpath;

@@ -8,7 +8,7 @@
  *
  * Created on 28-Nov-2009, 4:41:46 PM
  */
-package sod;
+package FileTransfer;
 
 import FileTransfer.*;
 import sod.*;
@@ -22,7 +22,7 @@ import FileTransfer.FileTransferNetWrapper;
  *
  * @author Adrian
  */
-public class FileTransfer extends javax.swing.JFrame {
+public class FileTransferController extends javax.swing.JFrame {
 
     private String filePath;
     private String fileName;
@@ -32,7 +32,7 @@ public class FileTransfer extends javax.swing.JFrame {
     private Socket sock;
 
     //Receiving Tranfer Request
-    public FileTransfer(Boolean inc, String conName, String fName, Socket s) {
+    public FileTransferController(Boolean inc, String conName, String fName, Socket s) {
         initComponents();
         this.setDefaultCloseOperation(this.DO_NOTHING_ON_CLOSE);
 
@@ -45,7 +45,7 @@ public class FileTransfer extends javax.swing.JFrame {
     }
 
     //Sending Transfer Request
-    public FileTransfer(Boolean inc, String conName, String conIp) {
+    public FileTransferController(Boolean inc, String conName, String conIp) {
         initComponents();
         this.setDefaultCloseOperation(this.DO_NOTHING_ON_CLOSE);
 
@@ -110,7 +110,7 @@ public class FileTransfer extends javax.swing.JFrame {
         setName("Form"); // NOI18N
         setResizable(false);
 
-        org.jdesktop.application.ResourceMap resourceMap = org.jdesktop.application.Application.getInstance(sod.SODApp.class).getContext().getResourceMap(FileTransfer.class);
+        org.jdesktop.application.ResourceMap resourceMap = org.jdesktop.application.Application.getInstance(sod.SODApp.class).getContext().getResourceMap(FileTransferController.class);
         jLabel1.setText(resourceMap.getString("jLabel1.text")); // NOI18N
         jLabel1.setName("jLabel1"); // NOI18N
 
@@ -120,7 +120,7 @@ public class FileTransfer extends javax.swing.JFrame {
         jLabel3.setText(resourceMap.getString("jLabel3.text")); // NOI18N
         jLabel3.setName("jLabel3"); // NOI18N
 
-        javax.swing.ActionMap actionMap = org.jdesktop.application.Application.getInstance(sod.SODApp.class).getContext().getActionMap(FileTransfer.class, this);
+        javax.swing.ActionMap actionMap = org.jdesktop.application.Application.getInstance(sod.SODApp.class).getContext().getActionMap(FileTransferController.class, this);
         setButton.setAction(actionMap.get("setPath")); // NOI18N
         setButton.setText(resourceMap.getString("setButton.text")); // NOI18N
         setButton.setName("setButton"); // NOI18N
@@ -129,7 +129,6 @@ public class FileTransfer extends javax.swing.JFrame {
 
         sendAcceptButton.setAction(actionMap.get("sendAccept")); // NOI18N
         sendAcceptButton.setText(resourceMap.getString("sendAcceptButton.text")); // NOI18N
-        sendAcceptButton.setEnabled(false);
         sendAcceptButton.setName("sendAcceptButton"); // NOI18N
 
         jLabel5.setText(resourceMap.getString("jLabel5.text")); // NOI18N

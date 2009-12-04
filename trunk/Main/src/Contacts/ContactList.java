@@ -106,4 +106,8 @@ public class ContactList {
     public int getLength() {
         return c.size();
     }
+
+    public void saveList(){
+        
+    }
 }
