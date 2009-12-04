@@ -8,20 +8,24 @@
  *
  * Created on 28-Nov-2009, 5:51:14 PM
  */
-
 package sod;
+
 import java.io.*;
+
 /**
  *
  * @author Adrian
  */
-public class Settings extends javax.swing.JFrame {
-private ContactsView contacts;
+public class Settings extends javax.swing.JDialog {
+
+    private ContactsView contacts;
+
     /** Creates new form Settings */
     public Settings() {
         initComponents();
+        this.setModal(true);
+        this.setDefaultCloseOperation(this.DO_NOTHING_ON_CLOSE);
     }
-
 
     /** This method is called from within the constructor to
      * initialize the form.
@@ -85,27 +89,25 @@ private ContactsView contacts;
             BufferedWriter dataFileOut = new BufferedWriter(new FileWriter("username.dat"));
             dataFileOut.write(username.getText());
             dataFileOut.close();
-            }
-        catch (IOException e){System.out.println(e);}
+        } catch (IOException e) {
+            System.out.println(e);
+        }
         this.setVisible(false);
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
-    * @param args the command line arguments
-    */
+     * @param args the command line arguments
+     */
+    public String getUserName() {
+        return username.getText();
+    }
 
-public String getUserName(){
-    return username.getText();
-}
-
-public void changeUserName (String name) {
-    username.setText(name);
-}
-
+    public void changeUserName(String name) {
+        username.setText(name);
+    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JTextField username;
     // End of variables declaration//GEN-END:variables
-
 }

@@ -34,7 +34,7 @@ public class FileTransferController extends javax.swing.JFrame {
     //Receiving Tranfer Request
     public FileTransferController(Boolean inc, String conName, String fName, Socket s) {
         initComponents();
-        this.setDefaultCloseOperation(this.DO_NOTHING_ON_CLOSE);
+        this.setDefaultCloseOperation(this.DISPOSE_ON_CLOSE);
 
         incoming = inc;
         fileName = fName;
@@ -47,7 +47,7 @@ public class FileTransferController extends javax.swing.JFrame {
     //Sending Transfer Request
     public FileTransferController(Boolean inc, String conName, String conIp) {
         initComponents();
-        this.setDefaultCloseOperation(this.DO_NOTHING_ON_CLOSE);
+        this.setDefaultCloseOperation(this.DISPOSE_ON_CLOSE);
 
         incoming = inc;
         contactName = conName;
