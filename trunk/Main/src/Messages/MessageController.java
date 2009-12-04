@@ -120,12 +120,14 @@ public class MessageController extends javax.swing.JFrame {
         chatPane.setText(chatPane.getText().concat(msgSend));
         MessageNetWrapper.sendMessage(socketList, null, msgSend);
         //decompose message -without name:
-        if (msgOctave.startsWith("!")){
-                octave.eval(msgOctave.substring(1));
-                chatPane.setText(chatPane.getText().concat(octaveWriter.toString()) + "\n");
-                MessageNetWrapper.sendMessage(socketList, null, octaveWriter.toString());
-                octaveWriter.flush();
+        if (octaveEnabled == true){
+            if (msgOctave.startsWith("!")){
+                    octave.eval(msgOctave.substring(1));
+                    chatPane.setText(chatPane.getText().concat(octaveWriter.toString()) + "\n");
+                    MessageNetWrapper.sendMessage(socketList, null, octaveWriter.toString());
+                    octaveWriter.flush();
             }
+       }
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
