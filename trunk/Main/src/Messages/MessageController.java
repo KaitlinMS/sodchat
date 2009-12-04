@@ -9,14 +9,17 @@ import dk.ange.octave.*;
 public class MessageController extends javax.swing.JFrame {
 
     private ArrayList<Socket> socketList;
+    private Collaboration.Collaboration collab;
     private StringWriter octaveWriter;
     private boolean octaveEnabled;
     private OctaveEngine octave;
     
-    public MessageController(ArrayList<Socket> sockets) {
+    public MessageController(ArrayList<Socket> sockets, Collaboration.Collaboration col) {
         initComponents();
+        this.setDefaultCloseOperation(this.DISPOSE_ON_CLOSE);
         octaveEnabled = false;
         socketList = sockets;
+        collab = col;
         for(int i = 0; i < socketList.size(); i++){
             (new MessageNetWrapper(socketList.get(i), this)).start();
         }
@@ -44,14 +47,22 @@ public class MessageController extends javax.swing.JFrame {
     }
 
     public void evalOctave(String msg){
+        try{
         int i = msg.indexOf(": !");
         if(i != -1)msg = msg.substring(i+2);
         if (msg.startsWith("!")){
             octaveWriter = new StringWriter();
             octave.setWriter(octaveWriter);
+            octave.setErrorWriter(octaveWriter);
             octave.eval(msg.substring(1));
             chatPane.setText(chatPane.getText().concat(octaveWriter.toString()) + "\n");
             MessageNetWrapper.sendMessage(socketList, null, octaveWriter.toString() + "\n");
+        }
+        }
+        catch(Exception e){
+            chatPane.setText(chatPane.getText().concat("Octave failed to eval" + msg + "This octave session must now reset\n"));
+            MessageNetWrapper.sendMessage(socketList, null, ("Octave failed to eval" + msg + "This octave session must now reset\n"));
+            octave = new OctaveEngineFactory().getScriptEngine();
         }
     }
 
@@ -135,6 +146,11 @@ public class MessageController extends javax.swing.JFrame {
         MessageNetWrapper.sendMessage(socketList, null, msgSend);
         if (octaveEnabled == true)
             evalOctave(msgSend);
+    }
+
+    public void dispose(){
+        collab.close();
+        super.dispose();
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

@@ -129,6 +129,7 @@ public class FileTransferController extends javax.swing.JFrame {
 
         sendAcceptButton.setAction(actionMap.get("sendAccept")); // NOI18N
         sendAcceptButton.setText(resourceMap.getString("sendAcceptButton.text")); // NOI18N
+        sendAcceptButton.setEnabled(false);
         sendAcceptButton.setName("sendAcceptButton"); // NOI18N
 
         jLabel5.setText(resourceMap.getString("jLabel5.text")); // NOI18N
@@ -278,8 +279,14 @@ public class FileTransferController extends javax.swing.JFrame {
         } catch (Exception e) {
             //this.dispose();
         }
-        ;
+        
     }
+
+    public void dispose(){
+        Cancel();
+        super.dispose();
+    }
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton cancelButton;
     private javax.swing.JLabel directionLabel;

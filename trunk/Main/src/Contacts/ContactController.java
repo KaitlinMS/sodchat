@@ -21,14 +21,13 @@ public class ContactController {
     }
 
     public void addContact(String ip) {
-        //Contact c = new Contact(ip, "Unconfirmed Contact");
-        //clist.add(c);
-        //saveContactList ();
+        
     }
 
     public void contactRequest(String ip, String cn) {
         Contact c = new Contact(ip, cn);
-        clist.add(c);
+        if(clist.search(ip) == false)
+            clist.add(c);
         saveContactList ();
     }
 

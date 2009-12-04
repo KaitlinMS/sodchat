@@ -41,15 +41,17 @@ public class CollaborationController {
         }
     }
 
-    public void End(String name) {
+    public void End(Collaboration collab) {
+
+        collaborations.remove(collab);
     }
 
     public void newCollab(Socket s, String name) {
-        collaborations.add(new Collaboration(s, name));
+        collaborations.add(new Collaboration(s, name, this));
     }
 
     public void newCollab(Boolean p, Boolean o, String chatName, String[] ips) {
-        collaborations.add(new Collaboration(p, o, chatName, ips));
+        collaborations.add(new Collaboration(p, o, chatName, ips, this));
     }
 
     public void joinRequest(Socket s, String chatName, String ip) {
