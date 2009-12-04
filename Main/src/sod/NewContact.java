@@ -35,8 +35,6 @@ public class NewContact extends javax.swing.JFrame {
 
         jLabel1 = new javax.swing.JLabel();
         contactip = new javax.swing.JTextField();
-        contactname = new javax.swing.JTextField();
-        jLabel2 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
 
         setName("Form"); // NOI18N
@@ -48,12 +46,6 @@ public class NewContact extends javax.swing.JFrame {
 
         contactip.setText(resourceMap.getString("contactip.text")); // NOI18N
         contactip.setName("contactip"); // NOI18N
-
-        contactname.setText(resourceMap.getString("contactname.text")); // NOI18N
-        contactname.setName("contactname"); // NOI18N
-
-        jLabel2.setText(resourceMap.getString("jLabel2.text")); // NOI18N
-        jLabel2.setName("jLabel2"); // NOI18N
 
         javax.swing.ActionMap actionMap = org.jdesktop.application.Application.getInstance(sod.SODApp.class).getContext().getActionMap(NewContact.class, this);
         jButton1.setAction(actionMap.get("AddContact")); // NOI18N
@@ -69,11 +61,7 @@ public class NewContact extends javax.swing.JFrame {
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(contactip, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(contactname, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(18, 18, 18)
                 .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
         );
@@ -84,9 +72,7 @@ public class NewContact extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(contactip, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(contactname, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton1)
-                    .addComponent(jLabel2))
+                    .addComponent(jButton1))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -95,19 +81,16 @@ public class NewContact extends javax.swing.JFrame {
 
     @Action
     public void AddContact() {
-        SODApp.getApplication().addContact(contactip.getText(), contactname.getText());
+        SODApp.getApplication().addContact(contactip.getText());
         contactip.setText("");
-        contactname.setText("");
         this.setVisible(false);
     }
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField contactip;
-    private javax.swing.JTextField contactname;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
     // End of variables declaration//GEN-END:variables
 
 }

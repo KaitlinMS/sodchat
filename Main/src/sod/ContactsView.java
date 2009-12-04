@@ -39,7 +39,6 @@ public class ContactsView extends FrameView {
         jMenuItem2 = new javax.swing.JMenuItem();
         jMenuItem7 = new javax.swing.JMenuItem();
         jSeparator1 = new javax.swing.JSeparator();
-        jMenuItem3 = new javax.swing.JMenuItem();
 
         mainPanel.setName("mainPanel"); // NOI18N
 
@@ -57,14 +56,14 @@ public class ContactsView extends FrameView {
             mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(mainPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 271, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 275, Short.MAX_VALUE)
                 .addContainerGap())
         );
         mainPanelLayout.setVerticalGroup(
             mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(mainPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 281, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 285, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -111,12 +110,6 @@ public class ContactsView extends FrameView {
         jSeparator1.setName("jSeparator1"); // NOI18N
         jMenu1.add(jSeparator1);
 
-        jMenuItem3.setAction(actionMap.get("showSettings")); // NOI18N
-        jMenuItem3.setIcon(resourceMap.getIcon("jMenuItem3.icon")); // NOI18N
-        jMenuItem3.setText(resourceMap.getString("jMenuItem3.text")); // NOI18N
-        jMenuItem3.setName("jMenuItem3"); // NOI18N
-        jMenu1.add(jMenuItem3);
-
         jMenuBar1.add(jMenu1);
 
         setComponent(mainPanel);
@@ -144,18 +137,13 @@ public class ContactsView extends FrameView {
     }
 
     @Action
-    public void showSettings() {
-        SODApp.getApplication().showSettings();
-    }
-
-    @Action
     public void RemoveContact() {
         SODApp.getApplication().removeContact(jList1.getSelectedIndex());
     }
     
     @Action
     public void ChangeName() {
-        SODApp.getApplication().showChange(jList1.getSelectedIndex());
+        SODApp.getApplication().showSettings();
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -165,7 +153,6 @@ public class ContactsView extends FrameView {
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;
-    private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuItem4;
     private javax.swing.JMenuItem jMenuItem6;
     private javax.swing.JMenuItem jMenuItem7;

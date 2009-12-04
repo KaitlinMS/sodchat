@@ -6,6 +6,7 @@ package sod;
 import org.jdesktop.application.Application;
 import org.jdesktop.application.SingleFrameApplication;
 import java.net.*;
+import java.io.*;
 
 import Contacts.ContactController;
 import Collaboration.CollaborationController;
@@ -28,14 +29,36 @@ public class SODApp extends SingleFrameApplication {
      */
     @Override
     protected void startup() {
+        
         concontroller = new ContactController();
         netcontroller = new NetworkController();
         colcontroller = new CollaborationController();
-
         contacts = new ContactsView(this);
         show(contacts);
-        setAdd = new NewContact();
         setSet = new Settings();
+        setSet.setVisible(false);
+        //showSettings();
+        setAdd = new NewContact();
+        try{
+        BufferedReader dataFileIn = new BufferedReader(new FileReader("username.dat"));
+        String name = dataFileIn.readLine();
+        if (name != null)
+        setSet.changeUserName (name);
+        dataFileIn.close();
+        }
+        catch (IOException e) {System.out.println(e);}
+        if (setSet.getUserName().equals("Default User")) {
+            setSet.setVisible(true);
+        }
+        try{
+        BufferedReader dataFileIn = new BufferedReader(new FileReader("contactlist.dat"));
+        String savedContact;
+        while ((savedContact = dataFileIn.readLine()) != null){
+            addContact(savedContact);
+        }
+        dataFileIn.close();
+        }
+        catch (IOException e) {System.out.println(e);}
     }
 
     /**
@@ -108,18 +131,12 @@ public class SODApp extends SingleFrameApplication {
         setAdd.setVisible(true);
     }
 
-    public void showChange(int i) {
-        if (i != -1) {
-            new ChangeName(concontroller.getAllIps()[i]);
-        }
-    }
-
     public void showSettings() {
         setSet.setVisible(true);
     }
 
-    public void addContact(String IP, String Name) {
-        concontroller.addContact(IP, Name, setSet.getUserName());
+    public void addContact(String IP) {
+        concontroller.addContact(IP);
         contacts.updateList();
         try {
             netcontroller.Send("con,req," + setSet.getUserName() + ",1", IP);
@@ -131,11 +148,6 @@ public class SODApp extends SingleFrameApplication {
         if (i != -1) {
             concontroller.removeContact(i);
         }
-        contacts.updateList();
-    }
-
-    public void changeName(String IP, String Name) {
-        concontroller.changeName(IP, Name);
         contacts.updateList();
     }
 

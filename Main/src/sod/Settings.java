@@ -10,17 +10,18 @@
  */
 
 package sod;
-
+import java.io.*;
 /**
  *
  * @author Adrian
  */
 public class Settings extends javax.swing.JFrame {
-
+private ContactsView contacts;
     /** Creates new form Settings */
     public Settings() {
         initComponents();
     }
+
 
     /** This method is called from within the constructor to
      * initialize the form.
@@ -34,8 +35,6 @@ public class Settings extends javax.swing.JFrame {
         jButton1 = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         username = new javax.swing.JTextField();
-        userip = new javax.swing.JTextField();
-        jLabel1 = new javax.swing.JLabel();
 
         setName("Form"); // NOI18N
 
@@ -51,12 +50,8 @@ public class Settings extends javax.swing.JFrame {
         jLabel2.setText(resourceMap.getString("jLabel2.text")); // NOI18N
         jLabel2.setName("jLabel2"); // NOI18N
 
+        username.setText(resourceMap.getString("username.text")); // NOI18N
         username.setName("username"); // NOI18N
-
-        userip.setName("userip"); // NOI18N
-
-        jLabel1.setText(resourceMap.getString("jLabel1.text")); // NOI18N
-        jLabel1.setName("jLabel1"); // NOI18N
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -64,10 +59,6 @@ public class Settings extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(userip, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(username, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -80,8 +71,6 @@ public class Settings extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
-                    .addComponent(userip, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(username, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton1)
                     .addComponent(jLabel2))
@@ -92,25 +81,30 @@ public class Settings extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        try {
+            BufferedWriter dataFileOut = new BufferedWriter(new FileWriter("username.dat"));
+            dataFileOut.write(username.getText());
+            dataFileOut.close();
+            }
+        catch (IOException e){System.out.println(e);}
         this.setVisible(false);
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
     * @param args the command line arguments
     */
-public String getUserIp(){
-    return userip.getText();
-}
 
 public String getUserName(){
     return username.getText();
 }
 
+public void changeUserName (String name) {
+    username.setText(name);
+}
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JTextField userip;
     private javax.swing.JTextField username;
     // End of variables declaration//GEN-END:variables
 
