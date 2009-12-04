@@ -36,6 +36,7 @@ public class MessageController extends javax.swing.JFrame {
 
     public void receiveMsg(String msg, Socket fromSocket){
         chatPane.setText(chatPane.getText().concat(msg) + "\n");
+        chatPane.setCaretPosition(chatPane.getDocument().getLength());
         MessageNetWrapper.sendMessage(socketList, fromSocket, msg);
         if (octaveEnabled == true)
             evalOctave(msg);
@@ -143,6 +144,7 @@ public class MessageController extends javax.swing.JFrame {
         String msgSend = sod.setSet.getUserName() + ": " + messageField.getText() + "\n";
         messageField.setText("");
         chatPane.setText(chatPane.getText().concat(msgSend));
+        chatPane.setCaretPosition(chatPane.getDocument().getLength());
         MessageNetWrapper.sendMessage(socketList, null, msgSend);
         if (octaveEnabled == true)
             evalOctave(msgSend);
