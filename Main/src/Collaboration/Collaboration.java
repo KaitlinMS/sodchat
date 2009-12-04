@@ -11,30 +11,33 @@ import java.util.ArrayList;
 
 //import sodmessaging.*;
 
-public class Collaboration extends Thread {
+public class Collaboration {
 
     //Variables
     private MessageController msgcontroller;
+    private CollaborationController colcontroller;
     private ArrayList<Socket> socketList;
     private String Name;
     private Boolean priv = false;
     private Boolean oct = false;
     private String[] invited;
 
-    public Collaboration(Socket s, String name) {
+    public Collaboration(Socket s, String name, CollaborationController ccont) {
+        colcontroller = ccont;
         socketList = new ArrayList();
         socketList.add(s);
         Name = name;
-        msgcontroller = new MessageController(socketList);
+        msgcontroller = new MessageController(socketList, this);
     }
 
-    public Collaboration(Boolean p, Boolean o, String name, String[] inv) {
+    public Collaboration(Boolean p, Boolean o, String name, String[] inv, CollaborationController ccont) {
+        colcontroller = ccont;
         socketList = new ArrayList();
         Name = name;
         priv = p;
         oct = o;
         invited = inv;
-        msgcontroller = new MessageController(socketList);
+        msgcontroller = new MessageController(socketList, this);
 
         if(o==true){
             msgcontroller.initOctave();
@@ -51,6 +54,7 @@ public class Collaboration extends Thread {
     }
 
     public void close() {
+        colcontroller.End(this);
     }
 
     public Boolean getPrivate() {
@@ -71,6 +75,4 @@ public class Collaboration extends Thread {
         return false;
     }
 
-    public void run() {
-    }
 }
