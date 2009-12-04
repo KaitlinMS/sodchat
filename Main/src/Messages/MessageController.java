@@ -114,13 +114,14 @@ public class MessageController extends javax.swing.JFrame {
     @Action
     public void Send() {
         SODApp sod = SODApp.getApplication();
-        String msg = sod.setSet.getUserName() + ": " + messageField.getText() + "\n";
+        String msgOctave = messageField.getText();
+        String msgSend = sod.setSet.getUserName() + ": " + messageField.getText() + "\n";
         messageField.setText("");
-        chatPane.setText(chatPane.getText().concat(msg));
-        MessageNetWrapper.sendMessage(socketList, null, msg);
+        chatPane.setText(chatPane.getText().concat(msgSend));
+        MessageNetWrapper.sendMessage(socketList, null, msgSend);
         //decompose message -without name:
-        if (msg.startsWith("!")){
-                octave.eval(msg.substring(1));
+        if (msgOctave.startsWith("!")){
+                octave.eval(msgOctave.substring(1));
                 chatPane.setText(chatPane.getText().concat(octaveWriter.toString()) + "\n");
                 MessageNetWrapper.sendMessage(socketList, null, octaveWriter.toString());
                 octaveWriter.flush();
