@@ -38,6 +38,7 @@ public class MessageController extends javax.swing.JFrame {
             if (msg.startsWith("!")){
                 octave.eval(msg.substring(1));
                 chatPane.setText(chatPane.getText().concat(octaveWriter.toString()) + "\n");
+                MessageNetWrapper.sendMessage(socketList, fromSocket, octaveWriter.toString());
                 octaveWriter.flush();
             }
         }
