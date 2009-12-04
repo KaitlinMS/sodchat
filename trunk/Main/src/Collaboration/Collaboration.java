@@ -8,6 +8,7 @@ package Collaboration;
 import java.net.*;
 import Messages.MessageController;
 import java.util.ArrayList;
+
 //import sodmessaging.*;
 
 public class Collaboration extends Thread {
@@ -25,7 +26,6 @@ public class Collaboration extends Thread {
         socketList.add(s);
         Name = name;
         msgcontroller = new MessageController(socketList);
-
     }
 
     public Collaboration(Boolean p, Boolean o, String name, String[] inv) {
@@ -36,6 +36,9 @@ public class Collaboration extends Thread {
         invited = inv;
         msgcontroller = new MessageController(socketList);
 
+        if(o==true){
+            msgcontroller.initOctave();
+        }
     }
 
     public void addMember(Socket s) {

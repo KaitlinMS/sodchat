@@ -36,7 +36,6 @@ public class SODApp extends SingleFrameApplication {
         show(contacts);
         setAdd = new NewContact();
         setSet = new Settings();
-
     }
 
     /**
