@@ -21,8 +21,6 @@ public class DiscussionView extends javax.swing.JFrame {
     /** Creates new form DiscussionView */
     public DiscussionView(String[] Names) {
         initComponents();
-        //check if SODApp got the ok in path here, not done
-
         contactList.setListData(Names);
     }
 
