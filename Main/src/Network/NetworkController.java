@@ -1,4 +1,5 @@
-package sod;
+package Network;
+import sod.*;
 import java.net.*;
 import java.io.*;
 

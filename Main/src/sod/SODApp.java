@@ -11,6 +11,7 @@ import java.io.*;
 import Contacts.ContactController;
 import Collaboration.CollaborationController;
 import FileTransfer.FileTransferController;
+import Network.NetworkController;
 
 /**
  * The main class of the application.
