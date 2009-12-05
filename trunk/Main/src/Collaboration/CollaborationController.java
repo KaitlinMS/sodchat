@@ -24,8 +24,6 @@ public class CollaborationController {
     }
 
     public void hostNew(Boolean priv, Boolean oct, String chatName, String[] ips) {
-        if(chatName.equals("Default"))
-            chatName = ips[0].toString();
         newCollab(priv, oct, chatName, ips);
     }
 
