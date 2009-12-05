@@ -21,11 +21,12 @@ public class Collaboration {
     private Boolean oct = false;
     private String[] invited;
 
-    public Collaboration(Socket s, String name, CollaborationController ccont) {
+    public Collaboration(Socket s, String name, Boolean Priv, CollaborationController ccont) {
         colcontroller = ccont;
         socketList = new ArrayList();
         socketList.add(s);
         Name = name;
+        priv = Priv;
         msgcontroller = new MessageController(socketList, this);
     }
 

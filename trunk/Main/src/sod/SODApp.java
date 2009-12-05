@@ -100,7 +100,7 @@ public class SODApp extends SingleFrameApplication {
         concontroller.addContact(IP);
         contacts.updateList();
         try {
-            netcontroller.Send("con,req," + setSet.getUserName(), IP);
+            netcontroller.Send("con,req," + getUserName(), IP);
         } catch (Exception e) {
         }
     }
@@ -119,12 +119,12 @@ public class SODApp extends SingleFrameApplication {
             concontroller.contactRequest(s.getInetAddress().getHostAddress(), event[1]);
             contacts.updateList();
             try {
-                netcontroller.Send("con,rep," + setSet.getUserName(), s.getInetAddress().getHostAddress());
+                netcontroller.Send("con,rep," + getUserName(), s.getInetAddress().getHostAddress());
                 s.close();
             } catch (Exception e) {
             }
         }
-        if (event[0].equals("rep")) {
+        else if (event[0].equals("rep")) {
             concontroller.contactRequest(s.getInetAddress().getHostAddress(), event[1]);
             contacts.updateList();
         }
@@ -149,7 +149,7 @@ public class SODApp extends SingleFrameApplication {
                 int j = contacts[i];
                 invitedIps[i] = ips[i];
                 if (j != -1) {
-                    netcontroller.Send("col,inv," + setSet.getUserName() + "," + hostingName, concontroller.getAllIps()[j]);
+                    netcontroller.Send("col,inv,"+getUserName()+","+hostingName+"," +p.toString(), concontroller.getAllIps()[j]);
                 }
             }
             colcontroller.hostNew(p, o, hostingName, invitedIps);
@@ -158,11 +158,11 @@ public class SODApp extends SingleFrameApplication {
         }
     }
 
-    public void joinChat(String ip, String name) {
+    public void joinChat(String ip, String name, Boolean priv) {
         try {
             ip = InetAddress.getByName(ip).getHostAddress();
             Socket j = netcontroller.Send("col,jon," + name, ip);
-            colcontroller.joinNew(j, name);
+            colcontroller.joinNew(j, name, priv);
         } catch (Exception e) {
             new ErrorPrompt("Could not join collaboration");
         }
@@ -170,9 +170,9 @@ public class SODApp extends SingleFrameApplication {
 
     public void colNetEvent(Socket s, String[] event) {
         //Invitation to a chat event
-        //Arguments: 1 - Other users name, 2 - Chat Name
+        //Arguments: 1 - Other users name, 2 - Chat Name, 3 - privacy
         if (event[0].equals("inv")) {
-            (new InvitationRequest(event[1], s.getInetAddress().getHostAddress(), event[2])).setVisible(true);
+            (new InvitationRequest(event[1], s.getInetAddress().getHostAddress(), event[2], event[3].equals("true"))).setVisible(true);
             try {
                 s.close();
             } catch (Exception e) {
@@ -205,5 +205,9 @@ public class SODApp extends SingleFrameApplication {
 
     public void showSettings() {
         setSet.setVisible(true);
+    }
+
+    public String getUserName(){
+        return setSet.getUserName();
     }
 }

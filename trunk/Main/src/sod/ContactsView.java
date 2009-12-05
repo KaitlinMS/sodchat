@@ -124,7 +124,7 @@ public class ContactsView extends FrameView {
     private void jList1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jList1MouseClicked
         if(evt.getClickCount() == 2){
             int[] i = jList1.getSelectedIndices();
-            SODApp.getApplication().hostChat(false, false, "Default", i);
+            SODApp.getApplication().hostChat(true, false, "Default", i);
         }
     }//GEN-LAST:event_jList1MouseClicked
 
