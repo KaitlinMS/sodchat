@@ -1,4 +1,5 @@
 package Messages;
+
 import java.util.ArrayList;
 import org.jdesktop.application.Action;
 import sod.SODApp;
@@ -7,7 +8,6 @@ import java.io.*;
 import dk.ange.octave.*;
 
 //---------------Contructors--------------------
-
 public class MessageController extends javax.swing.JFrame {
 
     private ArrayList<Socket> socketList;
@@ -15,27 +15,26 @@ public class MessageController extends javax.swing.JFrame {
     private StringWriter octaveWriter;
     private boolean octaveEnabled;
     private OctaveEngine octave;
-    
+
     public MessageController(ArrayList<Socket> sockets, Collaboration.Collaboration col) {
         initComponents();
         this.setDefaultCloseOperation(this.DISPOSE_ON_CLOSE);
         octaveEnabled = false;
         socketList = sockets;
         collab = col;
-        for(int i = 0; i < socketList.size(); i++){
+        for (int i = 0; i < socketList.size(); i++) {
             (new MessageNetWrapper(socketList.get(i), this)).start();
         }
         this.setVisible(true);
     }
 
     //----------------I/O-------------------
-
-    public void receiveMsg(String msg, Socket fromSocket){
-        chatPane.setText(chatPane.getText().concat(msg + "\n"));
-        chatPane.setCaretPosition(chatPane.getDocument().getLength());
+    public void receiveMsg(String msg, Socket fromSocket) {
+        Display(msg);
         MessageNetWrapper.sendMessage(socketList, fromSocket, msg);
-        if (octaveEnabled == true)
+        if (octaveEnabled == true) {
             evalOctave(msg);
+        }
     }
 
     @Action
@@ -43,61 +42,76 @@ public class MessageController extends javax.swing.JFrame {
         SODApp sod = SODApp.getApplication();
         String msgSend = sod.setSet.getUserName() + ": " + messageField.getText();
         messageField.setText("");
-        chatPane.setText(chatPane.getText().concat(msgSend + "\n"));
-        chatPane.setCaretPosition(chatPane.getDocument().getLength());
+        Display(msgSend);
         MessageNetWrapper.sendMessage(socketList, null, msgSend);
-        if (octaveEnabled == true)
+        if (octaveEnabled == true) {
             evalOctave(msgSend);
+        }
     }
 
-    public void Alert(String alert){
-        chatPane.setText(chatPane.getText().concat(alert + "\n"));
-        chatPane.setCaretPosition(chatPane.getDocument().getLength());
+    public void Alert(String alert) {
+        Display(alert);
         MessageNetWrapper.sendMessage(socketList, null, alert);
     }
 
-    //---------------Octave----------------------
+    public void Display(String msg) {
+        chatPane.setText(chatPane.getText().concat(msg + "\n"));
+        chatPane.setCaretPosition(chatPane.getDocument().getLength());
+    }
 
-    public void initOctave(){
+    //---------------Octave----------------------
+    public void initOctave() {
         octaveEnabled = true;
         octave = new OctaveEngineFactory().getScriptEngine();
     }
 
-    public void evalOctave(String msg){
-        try{
-        int i = msg.indexOf(": !");
-        if(i != -1)msg = msg.substring(i+2);
-        if (msg.startsWith("!")){
-            octaveWriter = new StringWriter();
-            octave.setWriter(octaveWriter);
-            octave.setErrorWriter(octaveWriter);
-            octave.eval(msg.substring(1));
-            chatPane.setText(chatPane.getText().concat(octaveWriter.toString()) + "\n");
-            MessageNetWrapper.sendMessage(socketList, null, octaveWriter.toString());
-        }
-        }
-        catch(Exception e){
-            chatPane.setText(chatPane.getText().concat("Octave failed to eval" + msg + "This octave session must now reset\n"));
+    public void evalOctave(String msg) {
+        try {
+            int i = msg.indexOf(": !");
+            if (i != -1) {
+                msg = msg.substring(i + 2);
+            }
+            if (msg.startsWith("!")) {
+                octaveWriter = new StringWriter();
+                octave.setWriter(octaveWriter);
+                octave.setErrorWriter(octaveWriter);
+                octave.eval(msg.substring(1));
+                Display(octaveWriter.toString());
+                MessageNetWrapper.sendMessage(socketList, null, octaveWriter.toString());
+            }
+        } catch (Exception e) {
+            Display("Octave failed to eval" + msg + "This octave session must now reset");
             MessageNetWrapper.sendMessage(socketList, null, ("Octave failed to eval" + msg + "This octave session must now reset"));
             octave = new OctaveEngineFactory().getScriptEngine();
         }
     }
 
     //------------------Housekeeping------------
-
-    public void removeSocket(Socket s){
+    public void removeSocket(Socket s) {
         socketList.remove(s);
         Alert("User has left the collaboration");
     }
 
-    public void addSocket(Socket s){
+    public void addSocket(Socket s) {
         (new MessageNetWrapper(s, this)).start();
     }
 
-    public void dispose(){
+    public void closeSockets() {
+        try {
+            for (int i = 0; i < socketList.size(); i++) {
+                socketList.get(i).close();
+            }
+        } catch (Exception e) {
+        }
+    }
+
+    public void dispose() {
         collab.close();
+        closeSockets();
         super.dispose();
-        if(octaveEnabled)octave.destroy();
+        if (octaveEnabled) {
+            octave.destroy();
+        }
     }
 
     /** This method is called from within the constructor to
@@ -166,17 +180,16 @@ public class MessageController extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void messageFieldKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_messageFieldKeyPressed
-        if(evt.getKeyCode() == evt.VK_ENTER)
-            if(messageField.getText().length() > 0)
+        if (evt.getKeyCode() == evt.VK_ENTER) {
+            if (messageField.getText().length() > 0) {
                 Send();
+            }
+        }
     }//GEN-LAST:event_messageFieldKeyPressed
-
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextPane chatPane;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextField messageField;
     private javax.swing.JButton sendButton;
     // End of variables declaration//GEN-END:variables
-
 }
