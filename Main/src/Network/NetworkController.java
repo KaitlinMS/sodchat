@@ -58,16 +58,7 @@ public class NetworkController extends Thread{
     }
 
      private String[] parseNetEvent(String cmd){
-        int i = Integer.parseInt(cmd.substring(cmd.length() -1));
-        String[] parsed = new String[i+1];
-
-        int j, start, end;
-        for(j =0, start = 0, end = 0; j<=i; j++){
-            end = cmd.indexOf(',', start);
-            parsed[j] = cmd.substring(start, end);
-            start = end + 1;
-        }
-        return parsed;
+        return cmd.split(",");
      }
 
     public void run(){

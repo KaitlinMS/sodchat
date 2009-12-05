@@ -249,7 +249,7 @@ public class FileTransferController extends javax.swing.JFrame {
             try {
                 SODApp sod = SODApp.getApplication();
                 String uname = sod.setSet.getUserName();
-                sock = sod.netcontroller.Send("ftr,xfr," + uname + "," + fileName + ",2", contactIp);
+                sock = sod.netcontroller.Send("ftr,xfr," + uname + "," + fileName, contactIp);
                 FileTransferNetWrapper ftnw = new FileTransferNetWrapper(incoming, filePath, fileName, sock, this);
                 ftnw.start();
             } catch (Exception e) {
@@ -257,6 +257,7 @@ public class FileTransferController extends javax.swing.JFrame {
                 this.dispose();
             }
         }
+        started = true;
     }
 
     @Action
@@ -271,10 +272,10 @@ public class FileTransferController extends javax.swing.JFrame {
             if (incoming) {
                 FileTransferNetWrapper.Decline(sock);
                 sock.close();
-                this.dispose();
+                super.dispose();
             } else {
                 //sock.close();
-                this.dispose();
+                super.dispose();
             }
         } catch (Exception e) {
             //this.dispose();
