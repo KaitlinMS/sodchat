@@ -48,6 +48,7 @@ public class Collaboration {
     public void addMember(Socket s) {
         socketList.add(s);
         msgcontroller.addSocket(s);
+        msgcontroller.Alert("New user has entered the collaboration");
     }
 
     public String toString() {
