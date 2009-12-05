@@ -30,6 +30,11 @@ public class ContactController {
         if (clist.search(ip) == false) {
             clist.add(c);
         }
+        else{
+            Contact cold = clist.getContact(ip);
+            if (c.getName() != cold.getName())
+                cold.changeName(cn);
+        }
         else
             clist.remove(ip);
             clist.add(c);
@@ -101,10 +106,4 @@ public class ContactController {
                 dataFileOut.write(uploadList);
                 dataFileOut.close();
             } catch (IOException e) {
-                System.out.println(e);
-            }
-        }
-    }
-}
-
-
+    
