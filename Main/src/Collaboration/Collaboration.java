@@ -68,7 +68,6 @@ public class Collaboration {
     }
 
     public Boolean isInvited(String ip) {
-        System.out.println("Handling join request ");
         for (int i = 0; i < invited.length; i++) {
             if (ip.equals(invited[i])) {
                 return true;
