@@ -153,6 +153,7 @@ public class MessageController extends javax.swing.JFrame {
     public void dispose(){
         collab.close();
         super.dispose();
+        octave.destroy();
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
