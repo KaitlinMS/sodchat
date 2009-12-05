@@ -32,7 +32,7 @@ public class ContactController {
         }
         else{
             Contact cold = clist.getContact(ip);
-            if (c.getName() != cold.getName())
+            if (c.getName().equals(cold.getName()))
                 cold.changeName(cn);
         }
         else
