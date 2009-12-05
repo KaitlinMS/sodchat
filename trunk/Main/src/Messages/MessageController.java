@@ -61,8 +61,14 @@ public class MessageController extends javax.swing.JFrame {
 
     //---------------Octave----------------------
     public void initOctave() {
-        octaveEnabled = true;
-        octave = new OctaveEngineFactory().getScriptEngine();
+        try{
+            octaveEnabled = true;
+            octave = new OctaveEngineFactory().getScriptEngine();
+        }
+        catch(Exception e){
+            octaveEnabled = false;
+            Display("Octave could not be initialized!");
+        }
     }
 
     public void evalOctave(String msg) {
