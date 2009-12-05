@@ -30,6 +30,9 @@ public class ContactController {
         if (clist.search(ip) == false) {
             clist.add(c);
         }
+        else
+            clist.remove(ip);
+            clist.add(c);
         // Save changes made to the conact list.
         saveContactList();
     }
