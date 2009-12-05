@@ -2,15 +2,14 @@
  * Collaboration.java
  * Handles the creation of collaborations and their options.
  */
-
 package Collaboration;
 
 import java.net.*;
 import Messages.MessageController;
 import java.util.ArrayList;
 
+// Unused import:
 //import sodmessaging.*;
-
 public class Collaboration {
 
     //Variables
@@ -39,7 +38,8 @@ public class Collaboration {
         invited = inv;
         msgcontroller = new MessageController(socketList, this);
 
-        if(o==true){
+        if (o == true) {
+            // Start Octave
             msgcontroller.initOctave();
         }
     }
@@ -74,5 +74,4 @@ public class Collaboration {
         }
         return false;
     }
-
 }
