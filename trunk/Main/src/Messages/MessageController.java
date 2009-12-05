@@ -6,6 +6,8 @@ import java.net.*;
 import java.io.*;
 import dk.ange.octave.*;
 
+//---------------Contructors--------------------
+
 public class MessageController extends javax.swing.JFrame {
 
     private ArrayList<Socket> socketList;
@@ -26,28 +28,35 @@ public class MessageController extends javax.swing.JFrame {
         this.setVisible(true);
     }
 
-    public void removeSocket(Socket s){
-        socketList.remove(s);
-        Alert("User has left the collaboration");
-    }
-
-    public void addSocket(Socket s){
-        (new MessageNetWrapper(s, this)).start();
-    }
+    //----------------I/O-------------------
 
     public void receiveMsg(String msg, Socket fromSocket){
-        chatPane.setText(chatPane.getText().concat(msg) + "\n");
+        chatPane.setText(chatPane.getText().concat(msg + "\n"));
         chatPane.setCaretPosition(chatPane.getDocument().getLength());
         MessageNetWrapper.sendMessage(socketList, fromSocket, msg);
         if (octaveEnabled == true)
             evalOctave(msg);
     }
 
+    @Action
+    public void Send() {
+        SODApp sod = SODApp.getApplication();
+        String msgSend = sod.setSet.getUserName() + ": " + messageField.getText();
+        messageField.setText("");
+        chatPane.setText(chatPane.getText().concat(msgSend + "\n"));
+        chatPane.setCaretPosition(chatPane.getDocument().getLength());
+        MessageNetWrapper.sendMessage(socketList, null, msgSend);
+        if (octaveEnabled == true)
+            evalOctave(msgSend);
+    }
+
     public void Alert(String alert){
-        chatPane.setText(chatPane.getText().concat(alert) + "\n");
+        chatPane.setText(chatPane.getText().concat(alert + "\n"));
         chatPane.setCaretPosition(chatPane.getDocument().getLength());
         MessageNetWrapper.sendMessage(socketList, null, alert);
     }
+
+    //---------------Octave----------------------
 
     public void initOctave(){
         octaveEnabled = true;
@@ -64,14 +73,31 @@ public class MessageController extends javax.swing.JFrame {
             octave.setErrorWriter(octaveWriter);
             octave.eval(msg.substring(1));
             chatPane.setText(chatPane.getText().concat(octaveWriter.toString()) + "\n");
-            MessageNetWrapper.sendMessage(socketList, null, octaveWriter.toString() + "\n");
+            MessageNetWrapper.sendMessage(socketList, null, octaveWriter.toString());
         }
         }
         catch(Exception e){
             chatPane.setText(chatPane.getText().concat("Octave failed to eval" + msg + "This octave session must now reset\n"));
-            MessageNetWrapper.sendMessage(socketList, null, ("Octave failed to eval" + msg + "This octave session must now reset\n"));
+            MessageNetWrapper.sendMessage(socketList, null, ("Octave failed to eval" + msg + "This octave session must now reset"));
             octave = new OctaveEngineFactory().getScriptEngine();
         }
+    }
+
+    //------------------Housekeeping------------
+
+    public void removeSocket(Socket s){
+        socketList.remove(s);
+        Alert("User has left the collaboration");
+    }
+
+    public void addSocket(Socket s){
+        (new MessageNetWrapper(s, this)).start();
+    }
+
+    public void dispose(){
+        collab.close();
+        super.dispose();
+        if(octaveEnabled)octave.destroy();
     }
 
     /** This method is called from within the constructor to
@@ -145,23 +171,6 @@ public class MessageController extends javax.swing.JFrame {
                 Send();
     }//GEN-LAST:event_messageFieldKeyPressed
 
-    @Action
-    public void Send() {
-        SODApp sod = SODApp.getApplication();
-        String msgSend = sod.setSet.getUserName() + ": " + messageField.getText() + "\n";
-        messageField.setText("");
-        chatPane.setText(chatPane.getText().concat(msgSend));
-        chatPane.setCaretPosition(chatPane.getDocument().getLength());
-        MessageNetWrapper.sendMessage(socketList, null, msgSend);
-        if (octaveEnabled == true)
-            evalOctave(msgSend);
-    }
-
-    public void dispose(){
-        collab.close();
-        super.dispose();
-        octave.destroy();
-    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextPane chatPane;
