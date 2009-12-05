@@ -28,6 +28,7 @@ public class MessageController extends javax.swing.JFrame {
 
     public void removeSocket(Socket s){
         socketList.remove(s);
+        Alert("User has left the collaboration");
     }
 
     public void addSocket(Socket s){
@@ -40,6 +41,12 @@ public class MessageController extends javax.swing.JFrame {
         MessageNetWrapper.sendMessage(socketList, fromSocket, msg);
         if (octaveEnabled == true)
             evalOctave(msg);
+    }
+
+    public void Alert(String alert){
+        chatPane.setText(chatPane.getText().concat(alert) + "\n");
+        chatPane.setCaretPosition(chatPane.getDocument().getLength());
+        MessageNetWrapper.sendMessage(socketList, null, alert);
     }
 
     public void initOctave(){
