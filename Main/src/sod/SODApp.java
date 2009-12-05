@@ -138,10 +138,12 @@ public class SODApp extends SingleFrameApplication {
 
     public void hostChat(Boolean p, Boolean o, String hostingName, int[] contacts) {
         String[] invitedIps = new String[contacts.length];
+        String[] ips = concontroller.getAllIps();
+        if(hostingName.equals("Default"))
+            hostingName = ips[contacts[0]];
         if (contacts[0] == -1) {
             invitedIps = new String[0];
         }
-        String[] ips = concontroller.getAllIps();
         try {
             for (int i = 0; i < contacts.length; i++) {
                 int j = contacts[i];
