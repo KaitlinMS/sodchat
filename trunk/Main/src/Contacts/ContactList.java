@@ -2,7 +2,6 @@
  * ContactList.java
  * Handles the storage of contacts as well as the removal and addition of contacts
  */
-
 package Contacts;
 
 import java.net.*;
@@ -18,8 +17,8 @@ public class ContactList {
         c = new ArrayList<Contact>();
     }
 
-    // Cconverts the given IP address into a proper IP address and searches
-    // the contact list for that existing IP address
+    // Converts the given IP address into a proper IP address and searches
+    // the contact list for that existing IP address.
     public Boolean search(String ip) {
         try {
             int i = 0;
@@ -37,7 +36,7 @@ public class ContactList {
     }
 
     // Converts the given IP into a proper IP, then removes all contacts
-    // associated with that IP address
+    // associated with that IP address.
     public void remove(String ip) {
         try {
             int i = 0;
@@ -61,9 +60,9 @@ public class ContactList {
         c.add(con);
     }
 
-    // This method is not used but may be used in the future
+    // This method is not used but may be used in the future.
     // Searches the contact list for a given IP address and returns the
-    // contact's name
+    // contact's name.
     public String getName(String ip) {
         try {
             String s = InetAddress.getByName(ip).getHostAddress();
@@ -80,8 +79,8 @@ public class ContactList {
         }
     }
 
-    // Not used but may be in the future
-    // Returns all contacts stored
+    // Not used but may be in the future.
+    // Returns all contacts stored.
     public Contact[] getAll() {
         Contact[] a = new Contact[c.size()];
         return c.toArray(a);
@@ -107,7 +106,6 @@ public class ContactList {
         return c.size();
     }
 
-    public void saveList(){
-        
+    public void saveList() {
     }
 }

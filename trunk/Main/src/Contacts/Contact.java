@@ -1,8 +1,7 @@
 /*
  * Contact.java
- * Data structure that holds the information for contacts
+ * Data structure that holds the information for contacts.
  */
-
 package Contacts;
 
 import java.net.*;
