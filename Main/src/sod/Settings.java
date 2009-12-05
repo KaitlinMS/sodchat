@@ -85,14 +85,23 @@ public class Settings extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        try {
-            BufferedWriter dataFileOut = new BufferedWriter(new FileWriter("username.dat"));
-            dataFileOut.write(username.getText());
-            dataFileOut.close();
-        } catch (IOException e) {
-            System.out.println(e);
+        String un = username.getText();
+        if (un.equals("")) {
+            username.setText("Username must not be empty");
+        } else if (un.contains(":")) {
+            username.setText("Username cannot contain ':'");
+        } else if (un.length() > 12) {
+            username.setText("Must be less that 12 characters");
+        } else {
+            try {
+                BufferedWriter dataFileOut = new BufferedWriter(new FileWriter("username.dat"));
+                dataFileOut.write(username.getText());
+                dataFileOut.close();
+            } catch (IOException e) {
+                System.out.println(e);
+            }
+            this.setVisible(false);
         }
-        this.setVisible(false);
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
