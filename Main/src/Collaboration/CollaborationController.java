@@ -27,13 +27,13 @@ public class CollaborationController {
         newCollab(priv, oct, chatName, ips);
     }
 
-    public void joinNew(Socket js, String chatName) {
+    public void joinNew(Socket js, String chatName, Boolean priv) {
         try {
             Boolean b = cnw.canJoin(js);
             if (b) {
                 // If successful start a new collaboration with the inputted
                 // options.
-                newCollab(js, chatName);
+                newCollab(js, chatName, priv);
             } else {
                 js.close();
             }
@@ -46,8 +46,8 @@ public class CollaborationController {
         collaborations.remove(collab);
     }
 
-    public void newCollab(Socket s, String name) {
-        collaborations.add(new Collaboration(s, name, this));
+    public void newCollab(Socket s, String name, Boolean priv) {
+        collaborations.add(new Collaboration(s, name, priv, this));
     }
 
     public void newCollab(Boolean p, Boolean o, String chatName, String[] ips) {

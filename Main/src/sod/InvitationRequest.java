@@ -6,12 +6,14 @@ public class InvitationRequest extends javax.swing.JFrame {
 
     String chatIp;
     String chatName;
+    Boolean priv;
 
-    public InvitationRequest(String name, String i, String n) {
+    public InvitationRequest(String name, String i, String n, Boolean p) {
         initComponents();
         contactName.setText(name);
         chatIp = i;
         chatName = n;
+        priv = p;
         this.setDefaultCloseOperation(this.DISPOSE_ON_CLOSE);
     }
 
@@ -80,7 +82,7 @@ public class InvitationRequest extends javax.swing.JFrame {
 
     @Action
     public void Accept() {
-        SODApp.getApplication().joinChat(chatIp, chatName);
+        SODApp.getApplication().joinChat(chatIp, chatName, priv);
         this.dispose();
     }
 

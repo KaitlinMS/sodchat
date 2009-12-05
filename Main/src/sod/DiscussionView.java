@@ -192,7 +192,7 @@ public class DiscussionView extends javax.swing.JFrame {
         String jnm = joinName.getText();
         SODApp sod = SODApp.getApplication();
 
-        sod.joinChat(jip, jnm);
+        sod.joinChat(jip, jnm, false);
         this.dispose();
         
     }
