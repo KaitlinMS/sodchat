@@ -23,14 +23,14 @@ public class CollaborationNetWrapper {
             String response = in.readLine();
             s.setSoTimeout(0);
             if (response.equals("PRIVATE")) {
-                new sod.ErrorPrompt("The chat you were trying to join is private");
+                new sod.ErrorPrompt("The chat you were trying to join is private.");
             } else if (response.equals("ACCEPT")) {
                 return true;
             } else if (response.equals("DNE")) {
-                new sod.ErrorPrompt("The chat you were trying to join does not exist");
+                new sod.ErrorPrompt("The chat you were trying to join does not exist.");
             }
         } catch (Exception e) {
-            new sod.ErrorPrompt("Unable to join collaboration. Check that you entered the correct ip address");
+            new sod.ErrorPrompt("Unable to join collaboration. Check that you entered the correct IP address.");
         }
         return false;
     }

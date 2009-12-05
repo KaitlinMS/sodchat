@@ -3,7 +3,6 @@
  * Handles acquisition and application of collaboration settings, as well as
  * messaging in a collaboration.
  */
-
 package Collaboration;
 
 import java.net.*;
@@ -32,6 +31,8 @@ public class CollaborationController {
         try {
             Boolean b = cnw.canJoin(js);
             if (b) {
+                // If successful start a new collaboration with the inputted
+                // options.
                 newCollab(js, chatName);
             } else {
                 js.close();
@@ -42,7 +43,6 @@ public class CollaborationController {
     }
 
     public void End(Collaboration collab) {
-
         collaborations.remove(collab);
     }
 
