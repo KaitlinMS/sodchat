@@ -24,6 +24,7 @@ public class SODApp extends SingleFrameApplication {
     public ContactController concontroller;
     public NetworkController netcontroller;
     public CollaborationController colcontroller;
+    public currentIP cIP;
 
     //Controllers
     /**
@@ -35,6 +36,7 @@ public class SODApp extends SingleFrameApplication {
         concontroller = new ContactController();
         netcontroller = new NetworkController();
         colcontroller = new CollaborationController();
+        cIP = new currentIP();
         contacts = new ContactsView(this);
         show(contacts);
         setSet = new Settings();
@@ -205,6 +207,10 @@ public class SODApp extends SingleFrameApplication {
 
     public void showSettings() {
         setSet.setVisible(true);
+    }
+
+    public void showIP() {
+        cIP.setVisible(true);
     }
 
     public String getUserName(){

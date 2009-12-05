@@ -38,7 +38,7 @@ public class ContactsView extends FrameView {
         jMenu1 = new javax.swing.JMenu();
         jMenuItem2 = new javax.swing.JMenuItem();
         jMenuItem7 = new javax.swing.JMenuItem();
-        jSeparator1 = new javax.swing.JSeparator();
+        jMenuItem3 = new javax.swing.JMenuItem();
 
         mainPanel.setName("mainPanel"); // NOI18N
 
@@ -61,14 +61,14 @@ public class ContactsView extends FrameView {
             mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(mainPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 271, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 275, Short.MAX_VALUE)
                 .addContainerGap())
         );
         mainPanelLayout.setVerticalGroup(
             mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(mainPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 281, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 285, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -112,8 +112,10 @@ public class ContactsView extends FrameView {
         jMenuItem7.setName("jMenuItem7"); // NOI18N
         jMenu1.add(jMenuItem7);
 
-        jSeparator1.setName("jSeparator1"); // NOI18N
-        jMenu1.add(jSeparator1);
+        jMenuItem3.setAction(actionMap.get("CurrentIP")); // NOI18N
+        jMenuItem3.setText(resourceMap.getString("jMenuItem3.text")); // NOI18N
+        jMenuItem3.setName("jMenuItem3"); // NOI18N
+        jMenu1.add(jMenuItem3);
 
         jMenuBar1.add(jMenu1);
 
@@ -158,6 +160,11 @@ public class ContactsView extends FrameView {
         SODApp.getApplication().showSettings();
     }
 
+    @Action
+    public void CurrentIP() {
+        SODApp.getApplication().showIP();
+    }
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public javax.swing.JList jList1;
     private javax.swing.JMenu jMenu1;
@@ -165,11 +172,11 @@ public class ContactsView extends FrameView {
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;
+    private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuItem4;
     private javax.swing.JMenuItem jMenuItem6;
     private javax.swing.JMenuItem jMenuItem7;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JSeparator jSeparator1;
     private javax.swing.JPanel mainPanel;
     // End of variables declaration//GEN-END:variables
     
