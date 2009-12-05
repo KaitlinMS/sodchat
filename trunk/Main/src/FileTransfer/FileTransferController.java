@@ -257,7 +257,6 @@ public class FileTransferController extends javax.swing.JFrame {
                 this.dispose();
             }
         }
-        started = true;
     }
 
     @Action
