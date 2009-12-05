@@ -26,9 +26,9 @@ public class MessageNetWrapper extends Thread {
     public void receiveMessage() {
         try {
             String incMsg = in.readLine();
-            System.out.println(incMsg);
             if (incMsg == null) {
                 mcontroller.removeSocket(soc);
+                Alive = false;
             } else {
                 mcontroller.receiveMsg(incMsg, soc);
             }
