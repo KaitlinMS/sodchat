@@ -149,7 +149,7 @@ public class SODApp extends SingleFrameApplication {
         try {
             for (int i = 0; i < contacts.length; i++) {
                 int j = contacts[i];
-                invitedIps[i] = ips[i];
+                invitedIps[i] = ips[j];
                 if (j != -1) {
                     netcontroller.Send("col,inv,"+getUserName()+","+hostingName+"," +p.toString(), concontroller.getAllIps()[j]);
                 }
