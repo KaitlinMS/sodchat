@@ -30,11 +30,6 @@ public class ContactController {
         if (clist.search(ip) == false) {
             clist.add(c);
         }
-        else{
-            Contact cold = clist.getContact(ip);
-            if (!c.getName().equals(cold.getName()))
-                cold.changeName(cn);
-        }
         else
             clist.remove(ip);
             clist.add(c);
