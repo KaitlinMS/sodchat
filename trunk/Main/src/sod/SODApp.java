@@ -51,9 +51,6 @@ public class SODApp extends SingleFrameApplication {
             }
             dataFileIn.close();
         } catch (IOException e) {
-            System.out.println(e);
-        }
-        if (setSet.getUserName().equals("Default User")) {
             setSet.setVisible(true);
         }
         try {
@@ -64,7 +61,6 @@ public class SODApp extends SingleFrameApplication {
             }
             dataFileIn.close();
         } catch (IOException e) {
-            System.out.println(e);
         }
     }
 
