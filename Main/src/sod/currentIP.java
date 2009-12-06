@@ -1,14 +1,7 @@
 /*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
+ * currentIP.java
+ * Displays the user's current IP address.
  */
-
-/*
- * NewContact.java
- *
- * Created on 28-Nov-2009, 5:44:02 PM
- */
-
 package sod;
 
 /**
@@ -17,19 +10,19 @@ package sod;
  */
 public class currentIP extends javax.swing.JFrame {
 
-    /** Creates new form NewContact */
+    // Methods
+    // Creates new form NewContact
     public currentIP() {
         initComponents();
         try {
-        java.net.InetAddress i = java.net.InetAddress.getLocalHost();
-        lblIP.setText("IP: "+ i.getHostAddress());
+            java.net.InetAddress i = java.net.InetAddress.getLocalHost();
+            lblIP.setText("IP: " + i.getHostAddress());
 
+        } catch (Exception e) {
+            e.printStackTrace();
         }
-        catch(Exception e){e.printStackTrace();}
 
     }
-
-
 
     /** This method is called from within the constructor to
      * initialize the form.
@@ -79,10 +72,8 @@ public class currentIP extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel lblIP;
     // End of variables declaration//GEN-END:variables
-
 }

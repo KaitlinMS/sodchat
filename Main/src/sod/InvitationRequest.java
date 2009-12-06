@@ -1,16 +1,23 @@
+/*
+ * InvitationRequest.java
+ * This prompt is displayed when a user is being invited to a collaboration.
+ * The user may accept or decline.
+ */
 package sod;
 
 import org.jdesktop.application.Action;
 
 public class InvitationRequest extends javax.swing.JFrame {
 
+    // Variable Declaration
     String chatIp;
     String chatName;
     Boolean priv;
 
+    // Methods
     public InvitationRequest(String name, String i, String n, Boolean p) {
         initComponents();
-        contactName.setText(name);
+        contactNameLabel.setText(name);
         chatIp = i;
         chatName = n;
         priv = p;
@@ -26,25 +33,25 @@ public class InvitationRequest extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel1 = new javax.swing.JLabel();
+        chatInvLabel = new javax.swing.JLabel();
         acceptButton = new javax.swing.JButton();
-        contactName = new javax.swing.JLabel();
+        contactNameLabel = new javax.swing.JLabel();
         declineButton = new javax.swing.JButton();
 
         setName("Form"); // NOI18N
         setResizable(false);
 
         org.jdesktop.application.ResourceMap resourceMap = org.jdesktop.application.Application.getInstance(sod.SODApp.class).getContext().getResourceMap(InvitationRequest.class);
-        jLabel1.setText(resourceMap.getString("jLabel1.text")); // NOI18N
-        jLabel1.setName("jLabel1"); // NOI18N
+        chatInvLabel.setText(resourceMap.getString("chatInvLabel.text")); // NOI18N
+        chatInvLabel.setName("chatInvLabel"); // NOI18N
 
         javax.swing.ActionMap actionMap = org.jdesktop.application.Application.getInstance(sod.SODApp.class).getContext().getActionMap(InvitationRequest.class, this);
         acceptButton.setAction(actionMap.get("Accept")); // NOI18N
         acceptButton.setText(resourceMap.getString("acceptButton.text")); // NOI18N
         acceptButton.setName("acceptButton"); // NOI18N
 
-        contactName.setText(resourceMap.getString("contactName.text")); // NOI18N
-        contactName.setName("contactName"); // NOI18N
+        contactNameLabel.setText(resourceMap.getString("contactNameLabel.text")); // NOI18N
+        contactNameLabel.setName("contactNameLabel"); // NOI18N
 
         declineButton.setAction(actionMap.get("Decline")); // NOI18N
         declineButton.setText(resourceMap.getString("declineButton.text")); // NOI18N
@@ -56,9 +63,9 @@ public class InvitationRequest extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel1)
+                .addComponent(chatInvLabel)
                 .addGap(18, 18, 18)
-                .addComponent(contactName, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(contactNameLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(acceptButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -70,8 +77,8 @@ public class InvitationRequest extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
-                    .addComponent(contactName)
+                    .addComponent(chatInvLabel)
+                    .addComponent(contactNameLabel)
                     .addComponent(acceptButton, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(declineButton, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -92,8 +99,8 @@ public class InvitationRequest extends javax.swing.JFrame {
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton acceptButton;
-    private javax.swing.JLabel contactName;
+    private javax.swing.JLabel chatInvLabel;
+    private javax.swing.JLabel contactNameLabel;
     private javax.swing.JButton declineButton;
-    private javax.swing.JLabel jLabel1;
     // End of variables declaration//GEN-END:variables
 }

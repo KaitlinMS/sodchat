@@ -1,18 +1,18 @@
 /*
  * ContactsView.java
+ * Displays a user's list of conacts.  Also contains options for collaborations
+ * and contact management.
  */
-
 package sod;
 
 import org.jdesktop.application.Action;
 import org.jdesktop.application.SingleFrameApplication;
 import org.jdesktop.application.FrameView;
 
-/**
- * The application's main frame.
- */
+// The application's main frame.
 public class ContactsView extends FrameView {
 
+    // Methods
     public ContactsView(SingleFrameApplication app) {
         super(app);
         initComponents();
@@ -29,31 +29,31 @@ public class ContactsView extends FrameView {
 
         mainPanel = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jList1 = new javax.swing.JList();
+        contactsList = new javax.swing.JList();
         jMenuBar1 = new javax.swing.JMenuBar();
-        jMenu2 = new javax.swing.JMenu();
-        jMenuItem4 = new javax.swing.JMenuItem();
-        jMenuItem1 = new javax.swing.JMenuItem();
-        jMenuItem6 = new javax.swing.JMenuItem();
-        jMenu1 = new javax.swing.JMenu();
-        jMenuItem2 = new javax.swing.JMenuItem();
-        jMenuItem7 = new javax.swing.JMenuItem();
-        jMenuItem3 = new javax.swing.JMenuItem();
+        newMenu = new javax.swing.JMenu();
+        collaborationMenuItem = new javax.swing.JMenuItem();
+        conactMenuItem = new javax.swing.JMenuItem();
+        fileTransferMenuItem = new javax.swing.JMenuItem();
+        editMenu = new javax.swing.JMenu();
+        removeContactMenuItem = new javax.swing.JMenuItem();
+        changeNameMenuItem = new javax.swing.JMenuItem();
+        currentIPMenuItem = new javax.swing.JMenuItem();
 
         mainPanel.setName("mainPanel"); // NOI18N
 
         jScrollPane1.setName("jScrollPane1"); // NOI18N
 
-        jList1.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
-        jList1.setName("jList1"); // NOI18N
-        jList1.addMouseListener(new java.awt.event.MouseAdapter() {
+        contactsList.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        contactsList.setName("contactsList"); // NOI18N
+        contactsList.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jList1MouseClicked(evt);
+                contactsListMouseClicked(evt);
             }
         });
-        jScrollPane1.setViewportView(jList1);
+        jScrollPane1.setViewportView(contactsList);
         org.jdesktop.application.ResourceMap resourceMap = org.jdesktop.application.Application.getInstance(sod.SODApp.class).getContext().getResourceMap(ContactsView.class);
-        jList1.getAccessibleContext().setAccessibleName(resourceMap.getString("jList1.AccessibleContext.accessibleName")); // NOI18N
+        contactsList.getAccessibleContext().setAccessibleName(resourceMap.getString("jList1.AccessibleContext.accessibleName")); // NOI18N
 
         javax.swing.GroupLayout mainPanelLayout = new javax.swing.GroupLayout(mainPanel);
         mainPanel.setLayout(mainPanelLayout);
@@ -74,61 +74,61 @@ public class ContactsView extends FrameView {
 
         jMenuBar1.setName("jMenuBar1"); // NOI18N
 
-        jMenu2.setText(resourceMap.getString("jMenu2.text")); // NOI18N
-        jMenu2.setIconTextGap(0);
-        jMenu2.setName("jMenu2"); // NOI18N
+        newMenu.setText(resourceMap.getString("newMenu.text")); // NOI18N
+        newMenu.setIconTextGap(0);
+        newMenu.setName("newMenu"); // NOI18N
 
         javax.swing.ActionMap actionMap = org.jdesktop.application.Application.getInstance(sod.SODApp.class).getContext().getActionMap(ContactsView.class, this);
-        jMenuItem4.setAction(actionMap.get("showDiscussionSettings")); // NOI18N
-        jMenuItem4.setIcon(resourceMap.getIcon("jMenuItem4.icon")); // NOI18N
-        jMenuItem4.setText(resourceMap.getString("jMenuItem4.text")); // NOI18N
-        jMenuItem4.setName("jMenuItem4"); // NOI18N
-        jMenu2.add(jMenuItem4);
+        collaborationMenuItem.setAction(actionMap.get("showDiscussionSettings")); // NOI18N
+        collaborationMenuItem.setIcon(resourceMap.getIcon("collaborationMenuItem.icon")); // NOI18N
+        collaborationMenuItem.setText(resourceMap.getString("collaborationMenuItem.text")); // NOI18N
+        collaborationMenuItem.setName("collaborationMenuItem"); // NOI18N
+        newMenu.add(collaborationMenuItem);
 
-        jMenuItem1.setAction(actionMap.get("AddContact")); // NOI18N
-        jMenuItem1.setIcon(resourceMap.getIcon("jMenuItem1.icon")); // NOI18N
-        jMenuItem1.setText(resourceMap.getString("jMenuItem1.text")); // NOI18N
-        jMenuItem1.setName("jMenuItem1"); // NOI18N
-        jMenu2.add(jMenuItem1);
+        conactMenuItem.setAction(actionMap.get("AddContact")); // NOI18N
+        conactMenuItem.setIcon(resourceMap.getIcon("conactMenuItem.icon")); // NOI18N
+        conactMenuItem.setText(resourceMap.getString("conactMenuItem.text")); // NOI18N
+        conactMenuItem.setName("conactMenuItem"); // NOI18N
+        newMenu.add(conactMenuItem);
 
-        jMenuItem6.setAction(actionMap.get("Transfer")); // NOI18N
-        jMenuItem6.setText(resourceMap.getString("jMenuItem6.text")); // NOI18N
-        jMenuItem6.setName("jMenuItem6"); // NOI18N
-        jMenu2.add(jMenuItem6);
+        fileTransferMenuItem.setAction(actionMap.get("Transfer")); // NOI18N
+        fileTransferMenuItem.setText(resourceMap.getString("fileTransferMenuItem.text")); // NOI18N
+        fileTransferMenuItem.setName("fileTransferMenuItem"); // NOI18N
+        newMenu.add(fileTransferMenuItem);
 
-        jMenuBar1.add(jMenu2);
+        jMenuBar1.add(newMenu);
 
-        jMenu1.setText(resourceMap.getString("jMenu1.text")); // NOI18N
-        jMenu1.setName("jMenu1"); // NOI18N
+        editMenu.setText(resourceMap.getString("editMenu.text")); // NOI18N
+        editMenu.setName("editMenu"); // NOI18N
 
-        jMenuItem2.setAction(actionMap.get("RemoveContact")); // NOI18N
-        jMenuItem2.setIcon(resourceMap.getIcon("jMenuItem2.icon")); // NOI18N
-        jMenuItem2.setText(resourceMap.getString("jMenuItem2.text")); // NOI18N
-        jMenuItem2.setName("jMenuItem2"); // NOI18N
-        jMenu1.add(jMenuItem2);
+        removeContactMenuItem.setAction(actionMap.get("RemoveContact")); // NOI18N
+        removeContactMenuItem.setIcon(resourceMap.getIcon("removeContactMenuItem.icon")); // NOI18N
+        removeContactMenuItem.setText(resourceMap.getString("removeContactMenuItem.text")); // NOI18N
+        removeContactMenuItem.setName("removeContactMenuItem"); // NOI18N
+        editMenu.add(removeContactMenuItem);
 
-        jMenuItem7.setAction(actionMap.get("ChangeName")); // NOI18N
-        jMenuItem7.setText(resourceMap.getString("jMenuItem7.text")); // NOI18N
-        jMenuItem7.setName("jMenuItem7"); // NOI18N
-        jMenu1.add(jMenuItem7);
+        changeNameMenuItem.setAction(actionMap.get("ChangeName")); // NOI18N
+        changeNameMenuItem.setText(resourceMap.getString("changeNameMenuItem.text")); // NOI18N
+        changeNameMenuItem.setName("changeNameMenuItem"); // NOI18N
+        editMenu.add(changeNameMenuItem);
 
-        jMenuItem3.setAction(actionMap.get("CurrentIP")); // NOI18N
-        jMenuItem3.setText(resourceMap.getString("jMenuItem3.text")); // NOI18N
-        jMenuItem3.setName("jMenuItem3"); // NOI18N
-        jMenu1.add(jMenuItem3);
+        currentIPMenuItem.setAction(actionMap.get("CurrentIP")); // NOI18N
+        currentIPMenuItem.setText(resourceMap.getString("currentIPMenuItem.text")); // NOI18N
+        currentIPMenuItem.setName("currentIPMenuItem"); // NOI18N
+        editMenu.add(currentIPMenuItem);
 
-        jMenuBar1.add(jMenu1);
+        jMenuBar1.add(editMenu);
 
         setComponent(mainPanel);
         setMenuBar(jMenuBar1);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jList1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jList1MouseClicked
-        if(evt.getClickCount() == 2){
-            int[] i = jList1.getSelectedIndices();
+    private void contactsListMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_contactsListMouseClicked
+        if (evt.getClickCount() == 2) {
+            int[] i = contactsList.getSelectedIndices();
             SODApp.getApplication().hostChat(true, false, "Default", i);
         }
-    }//GEN-LAST:event_jList1MouseClicked
+    }//GEN-LAST:event_contactsListMouseClicked
 
     @Action
     public void newMessage() {
@@ -152,9 +152,9 @@ public class ContactsView extends FrameView {
 
     @Action
     public void RemoveContact() {
-        SODApp.getApplication().removeContact(jList1.getSelectedIndex());
+        SODApp.getApplication().removeContact(contactsList.getSelectedIndex());
     }
-    
+
     @Action
     public void ChangeName() {
         SODApp.getApplication().showSettings();
@@ -164,28 +164,25 @@ public class ContactsView extends FrameView {
     public void CurrentIP() {
         SODApp.getApplication().showIP();
     }
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    public javax.swing.JList jList1;
-    private javax.swing.JMenu jMenu1;
-    private javax.swing.JMenu jMenu2;
+    private javax.swing.JMenuItem changeNameMenuItem;
+    private javax.swing.JMenuItem collaborationMenuItem;
+    private javax.swing.JMenuItem conactMenuItem;
+    public javax.swing.JList contactsList;
+    private javax.swing.JMenuItem currentIPMenuItem;
+    private javax.swing.JMenu editMenu;
+    private javax.swing.JMenuItem fileTransferMenuItem;
     private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JMenuItem jMenuItem1;
-    private javax.swing.JMenuItem jMenuItem2;
-    private javax.swing.JMenuItem jMenuItem3;
-    private javax.swing.JMenuItem jMenuItem4;
-    private javax.swing.JMenuItem jMenuItem6;
-    private javax.swing.JMenuItem jMenuItem7;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JPanel mainPanel;
+    private javax.swing.JMenu newMenu;
+    private javax.swing.JMenuItem removeContactMenuItem;
     // End of variables declaration//GEN-END:variables
-    
 
-    public void updateList(){
+    public void updateList() {
         //String[] n = SODApp.getApplication().concontroller.getAllNames();
-        //To display just names use n instead
+        //To display just names use n instead.
         Contacts.Contact[] a = SODApp.getApplication().concontroller.getAllContacts();
-        jList1.setListData(a);
+        contactsList.setListData(a);
     }
-
 }

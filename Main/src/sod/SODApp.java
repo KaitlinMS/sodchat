@@ -188,8 +188,8 @@ public class SODApp extends SingleFrameApplication {
     //-------------File Transfer Methods--------------
 
     public void showTransfer() {
-        if (contacts.jList1.isSelectionEmpty() != true) {
-            String contactIp = concontroller.getAllIps()[contacts.jList1.getSelectedIndex()];
+        if (contacts.contactsList.isSelectionEmpty() != true) {
+            String contactIp = concontroller.getAllIps()[contacts.contactsList.getSelectedIndex()];
             String contactName = concontroller.getName(contactIp);
             (new FileTransferController(false, contactName, contactIp)).setVisible(true);
         }
