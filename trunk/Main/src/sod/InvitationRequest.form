@@ -25,9 +25,9 @@
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
+              <Component id="chatInvLabel" min="-2" max="-2" attributes="0"/>
               <EmptySpace type="separate" max="-2" attributes="0"/>
-              <Component id="contactName" min="-2" pref="153" max="-2" attributes="0"/>
+              <Component id="contactNameLabel" min="-2" pref="153" max="-2" attributes="0"/>
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Component id="acceptButton" max="32767" attributes="0"/>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
@@ -41,8 +41,8 @@
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="jLabel1" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="contactName" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="chatInvLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="contactNameLabel" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="acceptButton" alignment="3" min="-2" pref="23" max="-2" attributes="0"/>
                   <Component id="declineButton" alignment="3" min="-2" pref="23" max="-2" attributes="0"/>
               </Group>
@@ -52,10 +52,10 @@
     </DimensionLayout>
   </Layout>
   <SubComponents>
-    <Component class="javax.swing.JLabel" name="jLabel1">
+    <Component class="javax.swing.JLabel" name="chatInvLabel">
       <Properties>
-        <Property name="text" type="java.lang.String" resourceKey="jLabel1.text"/>
-        <Property name="name" type="java.lang.String" value="jLabel1" noResource="true"/>
+        <Property name="text" type="java.lang.String" resourceKey="chatInvLabel.text"/>
+        <Property name="name" type="java.lang.String" value="chatInvLabel" noResource="true"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JButton" name="acceptButton">
@@ -67,10 +67,10 @@
         <Property name="name" type="java.lang.String" value="acceptButton" noResource="true"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JLabel" name="contactName">
+    <Component class="javax.swing.JLabel" name="contactNameLabel">
       <Properties>
-        <Property name="text" type="java.lang.String" resourceKey="contactName.text"/>
-        <Property name="name" type="java.lang.String" value="contactName" noResource="true"/>
+        <Property name="text" type="java.lang.String" resourceKey="contactNameLabel.text"/>
+        <Property name="name" type="java.lang.String" value="contactNameLabel" noResource="true"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JButton" name="declineButton">

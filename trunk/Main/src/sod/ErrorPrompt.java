@@ -1,15 +1,8 @@
+/*
+ * ErrorPrompt.java
+ * Displays an error prompt detailing the error encountered.
+ */
 package sod;
-
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-
-/*
- * NetworkTimeout.java
- *
- * Created on 29-Nov-2009, 10:22:55 PM
- */
 
 /**
  *
@@ -17,9 +10,10 @@ package sod;
  */
 public class ErrorPrompt extends javax.swing.JFrame {
 
-    /** Creates new form NetworkTimeout */
+    // Methods
+    // Creates new form NetworkTimeout
     public ErrorPrompt(String error) {
-        initComponents();        
+        initComponents();
         this.setVisible(true);
         this.setDefaultCloseOperation(this.DISPOSE_ON_CLOSE);
         errorLabel.setText(error);
@@ -35,15 +29,15 @@ public class ErrorPrompt extends javax.swing.JFrame {
     private void initComponents() {
 
         errorLabel = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
+        errorLargeLabel = new javax.swing.JLabel();
         okButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         errorLabel.setText("Error: ");
 
-        jLabel2.setFont(new java.awt.Font("DejaVu Sans", 0, 24));
-        jLabel2.setText("Error!");
+        errorLargeLabel.setFont(new java.awt.Font("DejaVu Sans", 0, 24)); // NOI18N
+        errorLargeLabel.setText("Error!");
 
         okButton.setText("Ok");
         okButton.addActionListener(new java.awt.event.ActionListener() {
@@ -60,7 +54,7 @@ public class ErrorPrompt extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(164, 164, 164)
-                        .addComponent(jLabel2))
+                        .addComponent(errorLargeLabel))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(errorLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 376, Short.MAX_VALUE))
@@ -73,7 +67,7 @@ public class ErrorPrompt extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel2)
+                .addComponent(errorLargeLabel)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(errorLabel)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -87,15 +81,12 @@ public class ErrorPrompt extends javax.swing.JFrame {
     private void okButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_okButtonActionPerformed
         this.dispose();
     }//GEN-LAST:event_okButtonActionPerformed
-
     /**
-    * @param args the command line arguments
-    */
-
+     * @param args the command line arguments
+     */
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel errorLabel;
-    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel errorLargeLabel;
     private javax.swing.JButton okButton;
     // End of variables declaration//GEN-END:variables
-
 }

@@ -1,14 +1,7 @@
 /*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-
-/*
  * NewContact.java
- *
- * Created on 28-Nov-2009, 5:44:02 PM
+ * A prompt which allows the user to enter the IP address for a new contact.
  */
-
 package sod;
 
 import org.jdesktop.application.Action;
@@ -19,7 +12,8 @@ import org.jdesktop.application.Action;
  */
 public class NewContact extends javax.swing.JFrame {
 
-    /** Creates new form NewContact */
+    // Methods
+    // Creates new form NewContact.
     public NewContact() {
         initComponents();
     }
@@ -33,24 +27,24 @@ public class NewContact extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel1 = new javax.swing.JLabel();
-        contactip = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
+        ipLabel = new javax.swing.JLabel();
+        contactipField = new javax.swing.JTextField();
+        addButton = new javax.swing.JButton();
 
         setName("Form"); // NOI18N
         setResizable(false);
 
         org.jdesktop.application.ResourceMap resourceMap = org.jdesktop.application.Application.getInstance(sod.SODApp.class).getContext().getResourceMap(NewContact.class);
-        jLabel1.setText(resourceMap.getString("jLabel1.text")); // NOI18N
-        jLabel1.setName("jLabel1"); // NOI18N
+        ipLabel.setText(resourceMap.getString("ipLabel.text")); // NOI18N
+        ipLabel.setName("ipLabel"); // NOI18N
 
-        contactip.setText(resourceMap.getString("contactip.text")); // NOI18N
-        contactip.setName("contactip"); // NOI18N
+        contactipField.setText(resourceMap.getString("contactipField.text")); // NOI18N
+        contactipField.setName("contactipField"); // NOI18N
 
         javax.swing.ActionMap actionMap = org.jdesktop.application.Application.getInstance(sod.SODApp.class).getContext().getActionMap(NewContact.class, this);
-        jButton1.setAction(actionMap.get("AddContact")); // NOI18N
-        jButton1.setText(resourceMap.getString("jButton1.text")); // NOI18N
-        jButton1.setName("jButton1"); // NOI18N
+        addButton.setAction(actionMap.get("AddContact")); // NOI18N
+        addButton.setText(resourceMap.getString("addButton.text")); // NOI18N
+        addButton.setName("addButton"); // NOI18N
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -58,11 +52,11 @@ public class NewContact extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel1)
+                .addComponent(ipLabel)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(contactip, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(contactipField, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(addButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -70,9 +64,9 @@ public class NewContact extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
-                    .addComponent(contactip, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton1))
+                    .addComponent(ipLabel)
+                    .addComponent(contactipField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(addButton))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -81,16 +75,13 @@ public class NewContact extends javax.swing.JFrame {
 
     @Action
     public void AddContact() {
-        SODApp.getApplication().addContact(contactip.getText());
-        contactip.setText("");
+        SODApp.getApplication().addContact(contactipField.getText());
+        contactipField.setText("");
         this.setVisible(false);
     }
-
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTextField contactip;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JLabel jLabel1;
+    private javax.swing.JButton addButton;
+    private javax.swing.JTextField contactipField;
+    private javax.swing.JLabel ipLabel;
     // End of variables declaration//GEN-END:variables
-
 }

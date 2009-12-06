@@ -38,19 +38,19 @@
 
           <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
           <SubComponents>
-            <Component class="javax.swing.JList" name="jList1">
+            <Component class="javax.swing.JList" name="contactsList">
               <Properties>
                 <Property name="model" type="javax.swing.ListModel" editor="org.netbeans.modules.form.editors2.ListModelEditor">
                   <StringArray count="0"/>
                 </Property>
                 <Property name="selectionMode" type="int" value="0"/>
-                <Property name="name" type="java.lang.String" value="jList1" noResource="true"/>
+                <Property name="name" type="java.lang.String" value="contactsList" noResource="true"/>
               </Properties>
               <AccessibilityProperties>
                 <Property name="AccessibleContext.accessibleName" type="java.lang.String" resourceKey="jList1.AccessibleContext.accessibleName"/>
               </AccessibilityProperties>
               <Events>
-                <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jList1MouseClicked"/>
+                <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="contactsListMouseClicked"/>
               </Events>
               <AuxValues>
                 <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
@@ -69,76 +69,76 @@
         <Property name="useNullLayout" type="boolean" value="true"/>
       </Layout>
       <SubComponents>
-        <Menu class="javax.swing.JMenu" name="jMenu2">
+        <Menu class="javax.swing.JMenu" name="newMenu">
           <Properties>
-            <Property name="text" type="java.lang.String" resourceKey="jMenu2.text"/>
+            <Property name="text" type="java.lang.String" resourceKey="newMenu.text"/>
             <Property name="iconTextGap" type="int" value="0"/>
-            <Property name="name" type="java.lang.String" value="jMenu2" noResource="true"/>
+            <Property name="name" type="java.lang.String" value="newMenu" noResource="true"/>
           </Properties>
           <SubComponents>
-            <MenuItem class="javax.swing.JMenuItem" name="jMenuItem4">
+            <MenuItem class="javax.swing.JMenuItem" name="collaborationMenuItem">
               <Properties>
                 <Property name="action" type="javax.swing.Action" editor="org.netbeans.modules.swingapp.ActionEditor">
                   <action class="sod.ContactsView" id="showDiscussionSettings" methodName="showDiscussionSettings"/>
                 </Property>
-                <Property name="icon" type="javax.swing.Icon" resourceKey="jMenuItem4.icon"/>
-                <Property name="text" type="java.lang.String" resourceKey="jMenuItem4.text"/>
-                <Property name="name" type="java.lang.String" value="jMenuItem4" noResource="true"/>
+                <Property name="icon" type="javax.swing.Icon" resourceKey="collaborationMenuItem.icon"/>
+                <Property name="text" type="java.lang.String" resourceKey="collaborationMenuItem.text"/>
+                <Property name="name" type="java.lang.String" value="collaborationMenuItem" noResource="true"/>
               </Properties>
             </MenuItem>
-            <MenuItem class="javax.swing.JMenuItem" name="jMenuItem1">
+            <MenuItem class="javax.swing.JMenuItem" name="conactMenuItem">
               <Properties>
                 <Property name="action" type="javax.swing.Action" editor="org.netbeans.modules.swingapp.ActionEditor">
                   <action class="sod.ContactsView" id="AddContact" methodName="AddContact"/>
                 </Property>
-                <Property name="icon" type="javax.swing.Icon" resourceKey="jMenuItem1.icon"/>
-                <Property name="text" type="java.lang.String" resourceKey="jMenuItem1.text"/>
-                <Property name="name" type="java.lang.String" value="jMenuItem1" noResource="true"/>
+                <Property name="icon" type="javax.swing.Icon" resourceKey="conactMenuItem.icon"/>
+                <Property name="text" type="java.lang.String" resourceKey="conactMenuItem.text"/>
+                <Property name="name" type="java.lang.String" value="conactMenuItem" noResource="true"/>
               </Properties>
             </MenuItem>
-            <MenuItem class="javax.swing.JMenuItem" name="jMenuItem6">
+            <MenuItem class="javax.swing.JMenuItem" name="fileTransferMenuItem">
               <Properties>
                 <Property name="action" type="javax.swing.Action" editor="org.netbeans.modules.swingapp.ActionEditor">
                   <action class="sod.ContactsView" id="Transfer" methodName="Transfer"/>
                 </Property>
-                <Property name="text" type="java.lang.String" resourceKey="jMenuItem6.text"/>
-                <Property name="name" type="java.lang.String" value="jMenuItem6" noResource="true"/>
+                <Property name="text" type="java.lang.String" resourceKey="fileTransferMenuItem.text"/>
+                <Property name="name" type="java.lang.String" value="fileTransferMenuItem" noResource="true"/>
               </Properties>
             </MenuItem>
           </SubComponents>
         </Menu>
-        <Menu class="javax.swing.JMenu" name="jMenu1">
+        <Menu class="javax.swing.JMenu" name="editMenu">
           <Properties>
-            <Property name="text" type="java.lang.String" resourceKey="jMenu1.text"/>
-            <Property name="name" type="java.lang.String" value="jMenu1" noResource="true"/>
+            <Property name="text" type="java.lang.String" resourceKey="editMenu.text"/>
+            <Property name="name" type="java.lang.String" value="editMenu" noResource="true"/>
           </Properties>
           <SubComponents>
-            <MenuItem class="javax.swing.JMenuItem" name="jMenuItem2">
+            <MenuItem class="javax.swing.JMenuItem" name="removeContactMenuItem">
               <Properties>
                 <Property name="action" type="javax.swing.Action" editor="org.netbeans.modules.swingapp.ActionEditor">
                   <action class="sod.ContactsView" id="RemoveContact" methodName="RemoveContact"/>
                 </Property>
-                <Property name="icon" type="javax.swing.Icon" resourceKey="jMenuItem2.icon"/>
-                <Property name="text" type="java.lang.String" resourceKey="jMenuItem2.text"/>
-                <Property name="name" type="java.lang.String" value="jMenuItem2" noResource="true"/>
+                <Property name="icon" type="javax.swing.Icon" resourceKey="removeContactMenuItem.icon"/>
+                <Property name="text" type="java.lang.String" resourceKey="removeContactMenuItem.text"/>
+                <Property name="name" type="java.lang.String" value="removeContactMenuItem" noResource="true"/>
               </Properties>
             </MenuItem>
-            <MenuItem class="javax.swing.JMenuItem" name="jMenuItem7">
+            <MenuItem class="javax.swing.JMenuItem" name="changeNameMenuItem">
               <Properties>
                 <Property name="action" type="javax.swing.Action" editor="org.netbeans.modules.swingapp.ActionEditor">
                   <action class="sod.ContactsView" id="ChangeName" methodName="ChangeName"/>
                 </Property>
-                <Property name="text" type="java.lang.String" resourceKey="jMenuItem7.text"/>
-                <Property name="name" type="java.lang.String" value="jMenuItem7" noResource="true"/>
+                <Property name="text" type="java.lang.String" resourceKey="changeNameMenuItem.text"/>
+                <Property name="name" type="java.lang.String" value="changeNameMenuItem" noResource="true"/>
               </Properties>
             </MenuItem>
-            <MenuItem class="javax.swing.JMenuItem" name="jMenuItem3">
+            <MenuItem class="javax.swing.JMenuItem" name="currentIPMenuItem">
               <Properties>
                 <Property name="action" type="javax.swing.Action" editor="org.netbeans.modules.swingapp.ActionEditor">
                   <action class="sod.ContactsView" id="CurrentIP" methodName="CurrentIP"/>
                 </Property>
-                <Property name="text" type="java.lang.String" resourceKey="jMenuItem3.text"/>
-                <Property name="name" type="java.lang.String" value="jMenuItem3" noResource="true"/>
+                <Property name="text" type="java.lang.String" resourceKey="currentIPMenuItem.text"/>
+                <Property name="name" type="java.lang.String" value="currentIPMenuItem" noResource="true"/>
               </Properties>
             </MenuItem>
           </SubComponents>
