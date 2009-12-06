@@ -34,7 +34,7 @@
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="joinNameField" min="-2" pref="141" max="-2" attributes="0"/>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Component id="joinButton" pref="100" max="32767" attributes="0"/>
+                      <Component id="joinButton" pref="59" max="32767" attributes="0"/>
                   </Group>
                   <Group type="102" alignment="1" attributes="0">
                       <Component id="hostOptionsLabel" min="-2" max="-2" attributes="0"/>
@@ -62,7 +62,7 @@
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
               <Component id="jScrollPane1" min="-2" pref="170" max="-2" attributes="0"/>
-              <EmptySpace pref="212" max="32767" attributes="0"/>
+              <EmptySpace pref="221" max="32767" attributes="0"/>
               <Component id="hostButton" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
           </Group>
@@ -114,7 +114,6 @@
     </Component>
     <Component class="javax.swing.JTextField" name="joinIPField">
       <Properties>
-        <Property name="text" type="java.lang.String" resourceKey="joinIPField.text"/>
         <Property name="name" type="java.lang.String" value="joinIPField" noResource="true"/>
       </Properties>
     </Component>
@@ -134,7 +133,6 @@
     </Component>
     <Component class="javax.swing.JLabel" name="hostOptionsLabel">
       <Properties>
-        <Property name="text" type="java.lang.String" resourceKey="hostOptionsLabel.text"/>
         <Property name="name" type="java.lang.String" value="hostOptionsLabel" noResource="true"/>
       </Properties>
     </Component>
@@ -204,7 +202,6 @@
     </Component>
     <Component class="javax.swing.JTextField" name="hostNameField">
       <Properties>
-        <Property name="text" type="java.lang.String" resourceKey="hostNameField.text"/>
         <Property name="name" type="java.lang.String" value="hostNameField" noResource="true"/>
       </Properties>
     </Component>

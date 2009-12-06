@@ -65,7 +65,6 @@
     </Component>
     <Component class="javax.swing.JTextField" name="usernameField">
       <Properties>
-        <Property name="text" type="java.lang.String" resourceKey="usernameField.text"/>
         <Property name="name" type="java.lang.String" value="usernameField" noResource="true"/>
       </Properties>
     </Component>

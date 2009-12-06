@@ -12,7 +12,7 @@
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
-                  <Component id="jScrollPane1" pref="275" max="32767" attributes="0"/>
+                  <Component id="jScrollPane1" pref="271" max="32767" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
               </Group>
           </Group>
@@ -21,7 +21,7 @@
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
-                  <Component id="jScrollPane1" pref="285" max="32767" attributes="0"/>
+                  <Component id="jScrollPane1" pref="281" max="32767" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
               </Group>
           </Group>
@@ -81,7 +81,6 @@
                 <Property name="action" type="javax.swing.Action" editor="org.netbeans.modules.swingapp.ActionEditor">
                   <action class="sod.ContactsView" id="showDiscussionSettings" methodName="showDiscussionSettings"/>
                 </Property>
-                <Property name="icon" type="javax.swing.Icon" resourceKey="collaborationMenuItem.icon"/>
                 <Property name="text" type="java.lang.String" resourceKey="collaborationMenuItem.text"/>
                 <Property name="name" type="java.lang.String" value="collaborationMenuItem" noResource="true"/>
               </Properties>
@@ -91,7 +90,6 @@
                 <Property name="action" type="javax.swing.Action" editor="org.netbeans.modules.swingapp.ActionEditor">
                   <action class="sod.ContactsView" id="AddContact" methodName="AddContact"/>
                 </Property>
-                <Property name="icon" type="javax.swing.Icon" resourceKey="conactMenuItem.icon"/>
                 <Property name="text" type="java.lang.String" resourceKey="conactMenuItem.text"/>
                 <Property name="name" type="java.lang.String" value="conactMenuItem" noResource="true"/>
               </Properties>
@@ -118,7 +116,6 @@
                 <Property name="action" type="javax.swing.Action" editor="org.netbeans.modules.swingapp.ActionEditor">
                   <action class="sod.ContactsView" id="RemoveContact" methodName="RemoveContact"/>
                 </Property>
-                <Property name="icon" type="javax.swing.Icon" resourceKey="removeContactMenuItem.icon"/>
                 <Property name="text" type="java.lang.String" resourceKey="removeContactMenuItem.text"/>
                 <Property name="name" type="java.lang.String" value="removeContactMenuItem" noResource="true"/>
               </Properties>

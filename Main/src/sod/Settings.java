@@ -50,7 +50,6 @@ public class Settings extends javax.swing.JDialog {
         nameLabel.setText(resourceMap.getString("nameLabel.text")); // NOI18N
         nameLabel.setName("nameLabel"); // NOI18N
 
-        usernameField.setText(resourceMap.getString("usernameField.text")); // NOI18N
         usernameField.setName("usernameField"); // NOI18N
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());

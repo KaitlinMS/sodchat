@@ -61,14 +61,14 @@ public class ContactsView extends FrameView {
             mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(mainPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 275, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 271, Short.MAX_VALUE)
                 .addContainerGap())
         );
         mainPanelLayout.setVerticalGroup(
             mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(mainPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 285, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 281, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -80,13 +80,11 @@ public class ContactsView extends FrameView {
 
         javax.swing.ActionMap actionMap = org.jdesktop.application.Application.getInstance(sod.SODApp.class).getContext().getActionMap(ContactsView.class, this);
         collaborationMenuItem.setAction(actionMap.get("showDiscussionSettings")); // NOI18N
-        collaborationMenuItem.setIcon(resourceMap.getIcon("collaborationMenuItem.icon")); // NOI18N
         collaborationMenuItem.setText(resourceMap.getString("collaborationMenuItem.text")); // NOI18N
         collaborationMenuItem.setName("collaborationMenuItem"); // NOI18N
         newMenu.add(collaborationMenuItem);
 
         conactMenuItem.setAction(actionMap.get("AddContact")); // NOI18N
-        conactMenuItem.setIcon(resourceMap.getIcon("conactMenuItem.icon")); // NOI18N
         conactMenuItem.setText(resourceMap.getString("conactMenuItem.text")); // NOI18N
         conactMenuItem.setName("conactMenuItem"); // NOI18N
         newMenu.add(conactMenuItem);
@@ -102,7 +100,6 @@ public class ContactsView extends FrameView {
         editMenu.setName("editMenu"); // NOI18N
 
         removeContactMenuItem.setAction(actionMap.get("RemoveContact")); // NOI18N
-        removeContactMenuItem.setIcon(resourceMap.getIcon("removeContactMenuItem.icon")); // NOI18N
         removeContactMenuItem.setText(resourceMap.getString("removeContactMenuItem.text")); // NOI18N
         removeContactMenuItem.setName("removeContactMenuItem"); // NOI18N
         editMenu.add(removeContactMenuItem);
