@@ -57,7 +57,6 @@
     </Component>
     <Component class="javax.swing.JTextField" name="contactipField">
       <Properties>
-        <Property name="text" type="java.lang.String" resourceKey="contactipField.text"/>
         <Property name="name" type="java.lang.String" value="contactipField" noResource="true"/>
       </Properties>
     </Component>

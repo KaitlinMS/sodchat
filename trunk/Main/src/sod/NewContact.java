@@ -38,7 +38,6 @@ public class NewContact extends javax.swing.JFrame {
         ipLabel.setText(resourceMap.getString("ipLabel.text")); // NOI18N
         ipLabel.setName("ipLabel"); // NOI18N
 
-        contactipField.setText(resourceMap.getString("contactipField.text")); // NOI18N
         contactipField.setName("contactipField"); // NOI18N
 
         javax.swing.ActionMap actionMap = org.jdesktop.application.Application.getInstance(sod.SODApp.class).getContext().getActionMap(NewContact.class, this);

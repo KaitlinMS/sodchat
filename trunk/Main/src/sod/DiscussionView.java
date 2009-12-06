@@ -51,7 +51,6 @@ public class DiscussionView extends javax.swing.JFrame {
         ipLabel.setText(resourceMap.getString("ipLabel.text")); // NOI18N
         ipLabel.setName("ipLabel"); // NOI18N
 
-        joinIPField.setText(resourceMap.getString("joinIPField.text")); // NOI18N
         joinIPField.setName("joinIPField"); // NOI18N
 
         jSeparator1.setName("jSeparator1"); // NOI18N
@@ -61,7 +60,6 @@ public class DiscussionView extends javax.swing.JFrame {
         joinButton.setText(resourceMap.getString("joinButton.text")); // NOI18N
         joinButton.setName("joinButton"); // NOI18N
 
-        hostOptionsLabel.setText(resourceMap.getString("hostOptionsLabel.text")); // NOI18N
         hostOptionsLabel.setName("hostOptionsLabel"); // NOI18N
 
         jScrollPane1.setName("jScrollPane1"); // NOI18N
@@ -90,7 +88,6 @@ public class DiscussionView extends javax.swing.JFrame {
         nameLabel2.setText(resourceMap.getString("nameLabel2.text")); // NOI18N
         nameLabel2.setName("nameLabel2"); // NOI18N
 
-        hostNameField.setText(resourceMap.getString("hostNameField.text")); // NOI18N
         hostNameField.setName("hostNameField"); // NOI18N
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -109,7 +106,7 @@ public class DiscussionView extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(joinNameField, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(joinButton, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE))
+                        .addComponent(joinButton, javax.swing.GroupLayout.DEFAULT_SIZE, 59, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(hostOptionsLabel)
                         .addGap(339, 339, 339)))
@@ -130,7 +127,7 @@ public class DiscussionView extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 212, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 221, Short.MAX_VALUE)
                 .addComponent(hostButton)
                 .addContainerGap())
         );
