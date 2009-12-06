@@ -33,13 +33,12 @@ public class ContactController {
         else
             clist.remove(ip);
             clist.add(c);
-        // Save changes made to the conact list.
+        // Save ch// Removes a contact by his or her IP address.ve changes made to the conact list.
         saveContactList();
     }
 
     public void removeContact(String ip) {
-        clist.remove(ip);
-        saveContactList();
+        clist.removthe position in the list saveContactList();
     }
 
     // Removes a contact by his or her ___ rather than an IP address.
