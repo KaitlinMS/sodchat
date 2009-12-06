@@ -15,6 +15,7 @@ public class NetworkSender extends Thread {
     private String msg;
     private String ip;
     private Socket sendSocket;
+    Boolean Alive = true;
 
     public NetworkSender(String message, String sip, int PORT) {
         msg = message;

@@ -163,7 +163,7 @@ public class SODApp extends SingleFrameApplication {
     public void joinChat(String ip, String name, Boolean priv) {
         try {
             ip = InetAddress.getByName(ip).getHostAddress();
-            Socket j = netcontroller.Send("col,jon," + name, ip);
+            Socket j = netcontroller.Establish("col,jon," + name, ip);
             colcontroller.joinNew(j, name, priv);
         } catch (Exception e) {
             new ErrorPrompt("Could not join collaboration");

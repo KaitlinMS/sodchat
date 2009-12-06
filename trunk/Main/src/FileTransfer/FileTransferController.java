@@ -245,7 +245,7 @@ public class FileTransferController extends javax.swing.JFrame {
             try {
                 SODApp sod = SODApp.getApplication();
                 String uname = sod.setSet.getUserName();
-                sock = sod.netcontroller.Send("ftr,xfr," + uname + "," + fileName, contactIp);
+                sock = sod.netcontroller.Establish("ftr,xfr," + uname + "," + fileName, contactIp);
                 FileTransferNetWrapper ftnw = new FileTransferNetWrapper(incoming, filePath, fileName, sock, this);
                 ftnw.start();
             } catch (Exception e) {

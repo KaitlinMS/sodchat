@@ -72,7 +72,11 @@ public class NetworkController extends Thread {
     }
 
     public Socket Send(String message, String ip) throws Exception {
-        /*Socket sendSocket;
+        return new NetworkSender(message, ip, PORT).returnSocket();
+    }
+
+    public Socket Establish(String message, String ip) throws Exception{
+        Socket sendSocket;
         try {
         sendSocket = new Socket(InetAddress.getByName(ip), PORT);
         PrintWriter sout = new PrintWriter(sendSocket.getOutputStream(), true);
@@ -80,8 +84,7 @@ public class NetworkController extends Thread {
         return sendSocket;
         } catch (Exception e) {
         throw e;
-        }*/
-        return new NetworkSender(message, ip, PORT).returnSocket();
+        }
     }
 
     // Not used now, but may be used to fix future network failures.
