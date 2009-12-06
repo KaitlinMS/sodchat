@@ -1,3 +1,7 @@
+/*
+ * MessageController.java
+ * Handles messaging between users.
+ */
 package Messages;
 
 import java.util.ArrayList;
@@ -7,15 +11,18 @@ import java.net.*;
 import java.io.*;
 import dk.ange.octave.*;
 
-//---------------Contructors--------------------
 public class MessageController extends javax.swing.JFrame {
 
+    // Variable Declaration
     private ArrayList<Socket> socketList;
     private Collaboration.Collaboration collab;
     private StringWriter octaveWriter;
     private boolean octaveEnabled;
     private OctaveEngine octave;
+    
+    //Methods
 
+    // Constructors
     public MessageController(ArrayList<Socket> sockets, Collaboration.Collaboration col) {
         initComponents();
         this.setDefaultCloseOperation(this.DISPOSE_ON_CLOSE);
@@ -28,7 +35,7 @@ public class MessageController extends javax.swing.JFrame {
         this.setVisible(true);
     }
 
-    //----------------I/O-------------------
+    // I/O
     public void receiveMsg(String msg, Socket fromSocket) {
         Display(msg);
         MessageNetWrapper.sendMessage(socketList, fromSocket, msg);
@@ -59,13 +66,12 @@ public class MessageController extends javax.swing.JFrame {
         chatPane.setCaretPosition(chatPane.getDocument().getLength());
     }
 
-    //---------------Octave----------------------
+    // Octave-related methods
     public void initOctave() {
-        try{
+        try {
             octaveEnabled = true;
             octave = new OctaveEngineFactory().getScriptEngine();
-        }
-        catch(Exception e){
+        } catch (Exception e) {
             octaveEnabled = false;
             Display("Octave could not be initialized!");
         }
@@ -92,10 +98,10 @@ public class MessageController extends javax.swing.JFrame {
         }
     }
 
-    //------------------Housekeeping------------
+    // Housekeeping
     public void removeSocket(Socket s) {
         socketList.remove(s);
-        Alert("User has left the collaboration");
+        Alert("User has left the collaboration.");
     }
 
     public void addSocket(Socket s) {

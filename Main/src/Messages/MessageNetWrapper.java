@@ -1,3 +1,7 @@
+/*
+ * MessageNetWrapper.java
+ * Handles network connections related to messaging.
+ */
 package Messages;
 
 import java.net.*;
@@ -6,11 +10,13 @@ import java.util.ArrayList;
 
 public class MessageNetWrapper extends Thread {
 
+    // Varibable Declaration
     Socket soc;
     BufferedReader in;
     MessageController mcontroller;
     Boolean Alive;
 
+    // Methods
     public MessageNetWrapper(Socket s, MessageController mc) {
         try {
             soc = s;
@@ -26,7 +32,7 @@ public class MessageNetWrapper extends Thread {
     public void receiveMessage() {
         try {
             String incMsg = in.readLine();
-            if (incMsg == null) {
+            if (incMsg == null) { // Ignore blank messages.
                 mcontroller.removeSocket(soc);
                 Alive = false;
             } else {
@@ -43,6 +49,7 @@ public class MessageNetWrapper extends Thread {
             try {
                 Socket sendTo = sockets.get(i);
                 PrintWriter out = new PrintWriter(sendTo.getOutputStream(), true);
+                // Only receive messages from a separate socket.
                 if (fromSocket != sendTo) {
                     out.println(msg);
                 }
