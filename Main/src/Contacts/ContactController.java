@@ -1,6 +1,6 @@
 /*
  * ContactController.java
- * Handles contact information storage, grouping, and removal
+ * Handles contact information storage, grouping, and removal.
  */
 package Contacts;
 
