@@ -1,3 +1,9 @@
+/*
+ * NetworkSender.java
+ * Handles network events for offline users.  These methods use their own
+ * thread, allowing offline users to recieve messages once they are online.
+ */
+
 package Network;
 
 import java.io.*;

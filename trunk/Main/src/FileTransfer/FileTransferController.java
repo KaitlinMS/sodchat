@@ -1,12 +1,6 @@
 /*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-
-/*
- * FileTransfer.java
- *
- * Created on 28-Nov-2009, 4:41:46 PM
+ * FileTransferContoller.java
+ * Handles file transfers between users.
  */
 package FileTransfer;
 
@@ -24,6 +18,7 @@ import FileTransfer.FileTransferNetWrapper;
  */
 public class FileTransferController extends javax.swing.JFrame {
 
+    // Variable declarations
     private String filePath;
     private String fileName;
     private boolean incoming;
@@ -31,6 +26,7 @@ public class FileTransferController extends javax.swing.JFrame {
     private String contactIp;
     private Socket sock;
 
+    // Methods
     //Receiving Tranfer Request
     public FileTransferController(Boolean inc, String conName, String fName, Socket s) {
         initComponents();
@@ -71,19 +67,19 @@ public class FileTransferController extends javax.swing.JFrame {
 
     }
 
-    public void begin(){
+    public void begin() {
         sendAcceptButton.setEnabled(false);
         setButton.setEnabled(false);
         progress.setIndeterminate(true);
 
     }
 
-    public void complete(){
+    public void complete() {
         progress.setIndeterminate(false);
         progress.setString("Transfer Complete");
         progress.setValue(100);
         cancelButton.setText("Ok");
-        
+
     }
 
     /** This method is called from within the constructor to
@@ -260,7 +256,7 @@ public class FileTransferController extends javax.swing.JFrame {
     }
 
     @Action
-    public void Cancell() {
+    public void Cancell() { // Misspelled purposefully - Cancel() is already used
 
         this.dispose();
     }
@@ -279,14 +275,13 @@ public class FileTransferController extends javax.swing.JFrame {
         } catch (Exception e) {
             //this.dispose();
         }
-        
+
     }
 
-    public void dispose(){
+    public void dispose() {
         Cancel();
         super.dispose();
     }
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton cancelButton;
     private javax.swing.JLabel directionLabel;

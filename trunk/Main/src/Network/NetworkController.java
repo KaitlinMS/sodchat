@@ -1,3 +1,7 @@
+/*
+ * NetworkController.java
+ * Handles network connections between users.
+ */
 package Network;
 
 import sod.*;
@@ -6,15 +10,16 @@ import java.io.*;
 
 public class NetworkController extends Thread {
 
-    //Listening Variables
+    // Variable declaration
+    // Listening Variables
     private static final int PORT = 44355;
     private ServerSocket ss;
-    //Thread Variables
+    // Thread Variables
     private Socket ts;
     private BufferedReader in;
-    //Main App
-    SODApp sod;
+    SODApp sod; // Main application
 
+    // Methods
     public NetworkController() {
         try {
             ss = new ServerSocket(PORT);
@@ -24,6 +29,8 @@ public class NetworkController extends Thread {
         }
     }
 
+    // "Listen" to a port for activity, and parse the command from the port, then
+    // route it to the appropriate event handler.
     private void Listen() {
         try {
             ts = ss.accept();
@@ -43,6 +50,7 @@ public class NetworkController extends Thread {
         }
     }
 
+    // Not used now, but may be used to fix future network failures.
     private void udpListen() {
         try {
             DatagramSocket udpSocket = new DatagramSocket(PORT);
@@ -66,16 +74,17 @@ public class NetworkController extends Thread {
     public Socket Send(String message, String ip) throws Exception {
         /*Socket sendSocket;
         try {
-            sendSocket = new Socket(InetAddress.getByName(ip), PORT);
-            PrintWriter sout = new PrintWriter(sendSocket.getOutputStream(), true);
-            sout.println(message);
-            return sendSocket;
+        sendSocket = new Socket(InetAddress.getByName(ip), PORT);
+        PrintWriter sout = new PrintWriter(sendSocket.getOutputStream(), true);
+        sout.println(message);
+        return sendSocket;
         } catch (Exception e) {
-            throw e;
+        throw e;
         }*/
         return new NetworkSender(message, ip, PORT).returnSocket();
     }
 
+    // Not used now, but may be used to fix future network failures.
     public static void udpSend(String message, String ip) throws Exception {
         DatagramSocket sendSocket = new DatagramSocket(PORT, InetAddress.getByName(ip));
         byte[] toSend = message.getBytes();

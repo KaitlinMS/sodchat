@@ -30,7 +30,7 @@
                       <Component id="jLabel5" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="nameLabel" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace pref="124" max="32767" attributes="0"/>
+                      <EmptySpace pref="148" max="32767" attributes="0"/>
                       <Component id="ipLabel" min="-2" pref="150" max="-2" attributes="0"/>
                   </Group>
                   <Component id="progress" alignment="1" pref="373" max="32767" attributes="0"/>
@@ -53,7 +53,7 @@
                   <Group type="102" attributes="0">
                       <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="directionLabel" pref="306" max="32767" attributes="0"/>
+                      <Component id="directionLabel" pref="321" max="32767" attributes="0"/>
                   </Group>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
@@ -131,7 +131,6 @@
           <action class="sod.FileTransfer" id="sendAccept" methodName="sendAccept"/>
         </Property>
         <Property name="text" type="java.lang.String" resourceKey="sendAcceptButton.text"/>
-        <Property name="enabled" type="boolean" value="false"/>
         <Property name="name" type="java.lang.String" value="sendAcceptButton" noResource="true"/>
       </Properties>
     </Component>
