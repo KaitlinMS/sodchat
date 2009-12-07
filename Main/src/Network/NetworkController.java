@@ -26,6 +26,7 @@ public class NetworkController extends Thread {
             sod = SODApp.getApplication();
             this.start();
         } catch (Exception e) {
+            new ErrorPrompt("Could not listen on port " + PORT);
         }
     }
 
