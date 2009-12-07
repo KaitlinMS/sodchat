@@ -98,6 +98,9 @@ public class ContactController {
                     uploadList = uploadList + "\n" + contactsList.get(i);
                 }
                 dataFileOut.write(uploadList);
-                dataFileOut.close();
-            } catch (IOException e) {
-    
+                da}
+        }
+    }
+}
+
+
