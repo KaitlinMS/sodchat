@@ -12,7 +12,7 @@ public class NetworkController extends Thread {
 
     // Variable declaration
     // Listening Variables
-    private static final int PORT = 44355;
+    private static final int PORT = 51413;
     private ServerSocket ss;
     // Thread Variables
     private Socket ts;
