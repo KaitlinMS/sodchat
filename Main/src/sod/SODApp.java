@@ -51,7 +51,7 @@ public class SODApp extends SingleFrameApplication {
             }
             dataFileIn.close();
         } catch (IOException e) {
-            setSet.setVisible(true);
+            showSettings();
         }
         try {
             BufferedReader dataFileIn = new BufferedReader(new FileReader("contactlist.dat"));
