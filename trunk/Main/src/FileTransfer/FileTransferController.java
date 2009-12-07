@@ -256,12 +256,6 @@ public class FileTransferController extends javax.swing.JFrame {
     }
 
     @Action
-    public void Cancell() { // Misspelled purposefully - Cancel() is already used
-
-        this.dispose();
-    }
-
-    @Action
     public void Cancel() {
         try {
             if (incoming) {
